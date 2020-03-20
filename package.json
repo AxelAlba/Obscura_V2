@@ -1,0 +1,20 @@
+{
+  "name": "obscura",
+  "version": "1.0.0",
+  "description": "social media app for creatives.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --watch src --watch index.js index.js"
+  },
+  "author": "3 Idiots",
+  "license": "ISC",
+  "dependencies": {
+    "@fancyapps/fancybox": "^3.5.7",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
