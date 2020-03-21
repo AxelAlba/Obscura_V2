@@ -19,10 +19,7 @@ app.engine('hbs', hbs({ // HBS Config
 
 // Route Handlers
 app.get('/', (req, res) => {
-  res.render('home', {
-    heading: 'Welcome!',
-    description: 'This wat app is an academic journal. It provides an overview of my academic life. hope it resets'
-  });
+  res.sendFile('../public/landing.html')
 });
 
 
