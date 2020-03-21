@@ -1,0 +1,41 @@
+{
+  "0": {
+    "uid": "0",
+    "email": "axel@email.com",
+    "password": "secret",
+    "username": "axelalba",
+    "firstName": "Axel",
+    "lastName": "Alba",
+    "profilePic": "https://cdn.shopify.com/s/files/1/2580/0020/files/TontonHouse-______180221_6ef85f36-b495-4e0b-8ff7-752c2402c478_300x.png?v=1529488749",
+    "bio": "I am Tonton and I have friends.",
+    "mobile": "09236457121",
+    "followers": ["1"],
+    "followings": ["0", "2"]
+  },
+  "1": {
+    "uid": "1",
+    "email": "martin@email.com",
+    "password": "secret",
+    "username": "martinmuri",
+    "firstName": "Martin",
+    "lastName": "Murillo",
+    "profilePic": "https://cdn.shopify.com/s/files/1/2580/0020/files/TontonHouse-______180221_6ef85f36-b495-4e0b-8ff7-752c2402c478_300x.png?v=1529488749",
+    "bio": "I am Tonton and I have friends.",
+    "mobile": "09436637154",
+    "followers": ["0", "2"],
+    "followings": []
+  },
+  "2": {
+    "uid": "2",
+    "email": "dan@email.com",
+    "password": "secret",
+    "username": "dandan",
+    "firstName": "Dan",
+    "lastName": "Velasco",
+    "profilePic": "https://cdn.shopify.com/s/files/1/2580/0020/files/TontonHouse-______180221_6ef85f36-b495-4e0b-8ff7-752c2402c478_300x.png?v=1529488749",
+    "bio": "I am Tonton and I have friends.",
+    "mobile": "09676237189",
+    "followers": ["0"],
+    "followings": ["0", "2"]
+  }
+}
