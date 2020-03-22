@@ -1,0 +1,19 @@
+.navbar-brand {
+    height: 50%;
+    width: 25%;
+}
+
+#profileHeader img {
+    max-width: 50%;
+    height: auto;
+}
+
+
+#profileHead {
+    background-image: url('../img/coverPhoto.jpg');
+}
+
+/*--- Bootstrap Padding Fix --*/
+[class*="col-"] {
+    padding: 1rem;
+}

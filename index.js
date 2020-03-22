@@ -3,6 +3,7 @@ const hbs = require('express-handlebars');
 const app = express();
 const path = require('path');
 const port = 3000;
+const bodyParser = require('body-parser');
 
 // Serve static files
 app.use(express.static('public'));
@@ -20,6 +21,9 @@ app.engine('hbs', hbs({ // HBS Config
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
+//these are the global variables, would serve as the temporary database (see Ajax lesson)
+var posts = require('./models/posts.json');
+
 // Route Handlers
 app.get('/', (req, res) => {
   res.render('landing');
@@ -33,10 +37,14 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-app.get('/test', (req, res) => {
+//ajax method to get the gallery
+app.get('/getGallery', (req, res) => {
+  res.status(200).send(posts);
+});
 
-
-
+//route sample for the gallery
+app.get('/gallerySample', (req, res) => {
+  res.render('gallerySample');
 });
 
 /*
