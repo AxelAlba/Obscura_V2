@@ -16,6 +16,10 @@ app.engine('hbs', hbs({ // HBS Config
   partialsDir: __dirname + '/views/partials/',
 }));
 
+// Configuration for handling API endpoint data (POST methods -> ex: name: req.body.name)
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 // Route Handlers
 app.get('/', (req, res) => {
   res.render('landing');
@@ -29,6 +33,17 @@ app.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+app.get('/test', (req, res) => {
 
+
+
+});
+
+/*
+  This takes the contents of the public folder and makes it accessible through the URL.
+  i.e. public/css/styles.css (in project) will be accessible through http://localhost:9090/css/styles.css
+*/
+
+app.use(express.static('public'));
 app.listen(port, () => console.log(`Listening to ${port}`));
 
