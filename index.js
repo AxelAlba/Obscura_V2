@@ -5,9 +5,6 @@ const path = require('path');
 const port = 3000;
 const bodyParser = require('body-parser');
 
-// Serve static files
-app.use(express.static('public'));
-
 // Setup handlebars
 app.set('view engine', 'hbs'); // Set template 
 app.engine('hbs', hbs({ // HBS Config
@@ -47,10 +44,14 @@ app.get('/gallerySample', (req, res) => {
   res.render('gallerySample');
 });
 
-/*
-  This takes the contents of the public folder and makes it accessible through the URL.
-  i.e. public/css/styles.css (in project) will be accessible through http://localhost:9090/css/styles.css
-*/
+app.get('/viewPost/:pid', (req, res) => {
+  var post = posts.filter(post => post.pid == req.params.pid)[0];
+  //res.status(200).send(post);
+  console.log(post);
+  res.render('post', {
+    post: post
+  });
+});
 
 app.use(express.static('public'));
 app.listen(port, () => console.log(`Listening to ${port}`));
