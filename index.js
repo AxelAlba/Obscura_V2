@@ -44,15 +44,16 @@ app.get('/gallerySample', (req, res) => {
   res.render('gallerySample');
 });
 
+// get posts by id
 app.get('/viewPost/:pid', (req, res) => {
   var post = posts.filter(post => post.pid == req.params.pid)[0];
-  //res.status(200).send(post);
-  console.log(post);
   res.render('post', {
     post: post
   });
 });
 
+// Serve static files inside public folder
 app.use(express.static('public'));
+
 app.listen(port, () => console.log(`Listening to ${port}`));
 
