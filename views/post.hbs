@@ -1,18 +1,8 @@
+<script src="/js/post.js"></script>
+<input type="hidden" id="pid" value={{pid}}>
 <div class="row">
-  <div class="col">
-    <img src="{{post.image}}">
+  <div class="col image-pane">
   </div>
-  <div class="col">
-    {{post.author}}
-    {{post.caption}}
-
-    <ul>
-      {{#each post.comments}}
-        <li>
-          <h5>{{this.author}}</h2>
-          <p>{{this.comment}}</p>
-        </li>
-      {{/each}}
-    </ul>
+  <div class="col info-pane">
   </div>
 </div>

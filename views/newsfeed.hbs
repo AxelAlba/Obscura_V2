@@ -1,11 +1,10 @@
-
-
-<div class = "gallery"> <!-- just insert this div block to access the gallery module--> 
-    <!-- This part would be implemented in the script.js, please implement post.hbs 
+<script src="/js/gallery.js"></script>
+<div class = "gallery"> 
+    {{#each post.comments}}
     <div>
         <a  data-fancybox="gallery" data-type = "ajax" data-src = "post.hbs" href="javascript:;"> 
             <img src="/public/img/intra.png" alt=""/>
         </a>
     </div>
-    -->
+    {{/each}}
 </div>

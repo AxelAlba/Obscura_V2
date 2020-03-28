@@ -1,5 +1,11 @@
+/* TO RESUE THIS CODE, IT MUST KNOW IF DISCOVER/FOLLOWED
+   initial solution: get state in hidden html input if discover/followed
+   then use that param for api call (ex. /api/getPosts/discover or /api/getPosts/followed)
+*/ 
+
 $(document).ready(() => {
-  $.ajax('getGallery', {
+  $.ajax({
+    url: '/api/getPosts',
     method: 'GET',
     success: (data, status) => {
       var gallery = $('.gallery'); 
@@ -32,10 +38,10 @@ function addToGallery(item, parentDiv) {
   var linkDiv = document.createElement('div');
   var link = document.createElement('a');
   var img = document.createElement('img');
-  // adding meaning
+  // adding attributes
   $(link).attr('data-fancybox', 'gallery');
   $(link).attr('data-type', 'iframe');
-  $(link).attr('data-src', `/viewPost/${item.pid}`); //Dan, please implement post.hbs
+  $(link).attr('data-src', `/post/${item.pid}`); //Dan, please implement post.hbs
   $(link).attr('href', 'javascript:;');
   $(img).attr('src', item.image);
   // appending
