@@ -1,6 +1,5 @@
 (function ($) {
   "use strict";
-
   // Preloader (if the #preloader div exists)
   $(window).on('load', function () {
     if ($('#preloader').length) {
