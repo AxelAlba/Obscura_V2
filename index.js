@@ -20,6 +20,19 @@ app.engine('hbs', hbs({ // HBS Config
   defaultView: 'default',
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
+  helpers: {
+    count: function(array){
+      var count = 0;
+      if (array.length > 0)
+      {
+        for (var i = 0; i < array.length; i++)
+        {
+          count++;
+        }
+      }
+      return count;
+  },
+}
 }));
 
 // Setup middlewares
@@ -30,11 +43,12 @@ app.use(express.static('public')); // serve static files
 // Make the following routes available
 app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/signup', signupRouter);
-app.use('/newsfeed', newsfeedRouter);
-app.use('/post', postRouter);
+app.use('/login', loginRouter);     //should be in the API of users?
+app.use('/signup', signupRouter);   //should be in the API of users?
+app.use('/newsfeed', newsfeedRouter);   //should be in the API of users?
+app.use('/post', postRouter);       //should be in the API of posts?
 
 // listen on port
+
 app.listen(port, () => console.log(`Listening to ${port}`));
 

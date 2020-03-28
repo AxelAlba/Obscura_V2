@@ -1,0 +1,55 @@
+<!--This is where the navbar should be-->
+<!--Profile picture & biography-->
+<div id = "profileHead" class = "container-fluid padding">
+	<div id = "profileHeader" class = "row welcome text-center fixed-wrap">
+        <div class = "col-12">
+            <a href = "editProfile.hbs"> <img src= "img/settings.png" style = "position: absolute; 
+            top: 25px;
+            right: 25px;
+            height: auto;
+            width: 50px;"></a>
+            <img src = {{logUser.profilePic}} class = "img-fluid rounded-circle" alt = "profile pic">
+         
+        </div>
+		<div class = "col-12">
+            <h3 style = "color:black;">{{logUser.firstName}} {{logUser.lastName}}</h3>
+            <p class = "lead" style = "color:black;">{{logUser.bio}}</p>
+        </div>        
+    </div>
+    <hr class = "light">
+</div>
+  <!--Contact info-->  
+  <div class = "text-center">
+    <button class = "btn btn-dark" data-toggle = "collapse" data-target= "#info" style = "width: 100%; margin: 0;"><i style="color: white;">Contact Info</i></button>
+    </div>
+
+<div id = "info" class = "collapse">
+  <div class = "container-fluid padding">
+    <div class = "row text-center">
+		<div class = "col-6">
+         <p class="text-info">Email: {{logUser.email}}</p>
+            <p class="text-info">Mobile Number: {{logUser.mobile}}</p>
+        </div>        
+        <div class = "col-6">
+            <p class="text-info">Telephone Number: {{logUser.telephone}}</p>
+            <p class="text-info">Address: {{logUser.address}}</p>
+        </div>   
+    </div>
+  </div>
+</div>
+
+<hr class = "light" style = "margin: 0;">
+
+<!--following/followers-->
+<div class = "container-fluid padding">
+    <div class = "row">
+		<div class = "col-6 text-right">
+            <p class = "secondary" style = "color: #9F9D9D;">{{#count logUser.followers}}{{/count}} followers</p>
+        </div>        
+        <div class = "col-6 text-left">
+            <p class = "secondary" style = "color: #9F9D9D;">{{#count logUser.followings}}{{/count}} following</p>
+        </div>   
+    </div>
+</div>
+
+<div class = "gallery"></div>

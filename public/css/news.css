@@ -1,0 +1,20 @@
+.gallery {
+    padding: 1em;
+    column-count: 2;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+@media (max-width: 800px) {
+    .gallery {
+        column-count: 1;
+    }
+}
+
+
+
+
+

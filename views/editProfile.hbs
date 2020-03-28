@@ -1,0 +1,49 @@
+<!--Edit Profile-->
+<div class= "row">
+  <form action="/users/{{logUser.uid}}" id = 'edit'> <!--This form would make the request: /users/{{logUser.uid}}-->
+    <div class = "col-3 text-center">
+        
+            <div class="form-group">
+                <img id = "uploadPreview" src = {{logUser.profilePic}} class = "rounded-circle img-fluid" alt = "profile pic">
+              <input type="file"  id="profilePic" class="form-control-file form-control-sm." onchange="PreviewImage();">
+            </div>
+        
+          
+    </div>
+    <div class = "col-9 text-left">
+        
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" placeholder={{logUser.firstName}}>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" placeholder={{logUser.lastName}}>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="biography">Biography</label>
+              <input type="text" class="form-control" id="biography" placeholder={{logUser.bio}}>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder={{logUser.email}}>
+              </div>
+              <div class="form-group">
+                <label for="mobileNum">Mobile Number</label>
+                <input type="text" class="form-control" id="mobileNum" placeholder={{logUser.mobile}}>
+              </div>
+              <div class="form-group">
+                <label for="telNum">Telephone Number</label>
+                <input type="text" class="form-control" id="telNum" placeholder={{logUser.telephone}}>
+              </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" placeholder={{logUser.address}}>
+            </div>
+            <button type="submit" class="btn btn-outline-dark" id = "update">Update</button>
+          
+    </div>
+  </form>
+</div>
