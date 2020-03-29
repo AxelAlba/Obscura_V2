@@ -9,7 +9,7 @@ const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
-const editRouter = require('./routes/editProfile.js');
+
 // create express app
 const port = 3000;
 const app = express();
@@ -49,8 +49,6 @@ app.use('/signup', signupRouter);
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
-app.use('/editProfile', editRouter);
-
 // listen on port
 
 app.listen(port, () => console.log(`Listening to ${port}`));
