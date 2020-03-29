@@ -10,7 +10,9 @@
 
 
 #profileHead {
-    background-image: url('../img/coverPhoto.jpg');
+    background-image: url('https://images.pexels.com/photos/326316/pexels-photo-326316.jpeg?cs=srgb&dl=close-up-of-vintage-camera-on-white-background-326316.jpg&fm=jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /*--- Bootstrap Padding Fix --*/

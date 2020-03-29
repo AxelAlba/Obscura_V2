@@ -8,7 +8,8 @@ const loginRouter = require('./routes/login.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
-
+const profileRouter = require('./routes/profile.js');
+const editRouter = require('./routes/editProfile.js');
 // create express app
 const port = 3000;
 const app = express();
@@ -20,6 +21,19 @@ app.engine('hbs', hbs({ // HBS Config
   defaultView: 'default',
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
+  helpers: {
+    count: function(array){
+      var count = 0;
+      if (array.length > 0)
+      {
+        for (var i = 0; i < array.length; i++)
+        {
+          count++;
+        }
+      }
+      return count;
+  },
+}
 }));
 
 // Setup middlewares
@@ -30,11 +44,14 @@ app.use(express.static('public')); // serve static files
 // Make the following routes available
 app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/signup', signupRouter);
-app.use('/newsfeed', newsfeedRouter);
-app.use('/post', postRouter);
+app.use('/login', loginRouter);     
+app.use('/signup', signupRouter);  
+app.use('/newsfeed', newsfeedRouter);   
+app.use('/post', postRouter);   
+app.use('/profile', profileRouter);
+app.use('/editProfile', editRouter);
 
 // listen on port
+
 app.listen(port, () => console.log(`Listening to ${port}`));
 

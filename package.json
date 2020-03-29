@@ -12,7 +12,9 @@
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0"
+    "express-handlebars": "^3.1.0",
+    "mongodb": "^3.5.5",
+    "mongoose": "^5.9.6"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"

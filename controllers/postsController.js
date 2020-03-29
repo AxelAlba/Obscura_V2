@@ -1,5 +1,8 @@
-// import model
+// import json model (temporary)
 Posts = require('../models/posts.json');
+
+//Importing the model (database)
+const postModel = require('../models/posts');
 
 // route handlers (CRUD)
 exports.viewPost = function(req, res) {
