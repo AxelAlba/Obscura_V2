@@ -9,7 +9,7 @@ const options = { useNewUrlParser: true,
 mongoose.connect(databaseURL, options);
 
 const userSchema = new mongoose.Schema({
-    user_id: {type: mongoose.Schema.Types.ObjectId, required: [true, "no user id provided"]},
+    //user_id: {type: mongoose.Schema.Types.ObjectId, required: [true, "no user id provided"]}, //this is automatic? _id <--
     email: {type: String, required: [true, "No email provided"]},
     password: {type: String, required: [true, "No password provided"]},
     userName: {type: String, required: [true, "No userName provided"]},
