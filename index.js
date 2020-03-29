@@ -49,7 +49,7 @@ app.use('/signup', signupRouter);
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
-// listen on port
 
+// listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
 
