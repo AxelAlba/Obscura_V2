@@ -8,7 +8,8 @@ const loginRouter = require('./routes/login.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
-
+const profileRouter = require('./routes/profile.js');
+const editRouter = require('./routes/editProfile.js');
 // create express app
 const port = 3000;
 const app = express();
@@ -43,10 +44,12 @@ app.use(express.static('public')); // serve static files
 // Make the following routes available
 app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);
-app.use('/login', loginRouter);     //should be in the API of users?
-app.use('/signup', signupRouter);   //should be in the API of users?
-app.use('/newsfeed', newsfeedRouter);   //should be in the API of users?
-app.use('/post', postRouter);       //should be in the API of posts?
+app.use('/login', loginRouter);     
+app.use('/signup', signupRouter);  
+app.use('/newsfeed', newsfeedRouter);   
+app.use('/post', postRouter);   
+app.use('/profile', profileRouter);
+app.use('/editProfile', editRouter);
 
 // listen on port
 

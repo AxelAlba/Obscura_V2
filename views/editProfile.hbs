@@ -1,6 +1,8 @@
+<script src="/js/editProfile.js"></script>
+
 <!--Edit Profile-->
-<div class= "row">
-  <form action="/users/{{logUser.uid}}" id = 'edit'> <!--This form would make the request: /users/{{logUser.uid}}-->
+<form action="/api/updateProfile/{{logUser.uid}}" id = 'edit'> <!--This form would make the request: /users/{{logUser.uid}}-->
+  <div class= "row">
     <div class = "col-3 text-center">
         
             <div class="form-group">
@@ -24,7 +26,7 @@
             </div>
             <div class="form-group">
               <label for="biography">Biography</label>
-              <input type="text" class="form-control" id="biography" placeholder={{logUser.bio}}>
+              <input type="text" class="form-control" id="biography" placeholder= {{logUser.bio}}>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
@@ -45,5 +47,5 @@
             <button type="submit" class="btn btn-outline-dark" id = "update">Update</button>
           
     </div>
-  </form>
-</div>
+  </div>
+</form>

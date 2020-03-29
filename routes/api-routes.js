@@ -9,11 +9,8 @@ const usersController = require('../controllers/usersController.js');
 //for the posts
 router.get('/getPosts', postsController.getPosts);       // get all posts
 router.get('/viewPost/:pid', postsController.viewPost);  // get single post
-router.get('/getGallery', postsController.getGallery);
 
 //for the users
-router.get('/profile' , usersController.getProfile);
-
 router.put('/updateProfile/:uid', usersController.updateProfile);
 
 

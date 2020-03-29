@@ -8,15 +8,13 @@ const options = { useNewUrlParser: true,
 mongoose.connect(databaseURL, options);
 
 const postSchema = new mongoose.Schema({
-    author_id: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, "no author id provided"]}, 
-    author: {type: String, required: [true, "No author name provided"]},
+    author: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, "no author id provided"]}, 
     img: {type: String, required: [true,"No img link provided"] },
     caption: {type: String, required: [true, "No caption provided"]},
     title: {type: String, required: [true, "No author provided"]},
     likes: {type: Number, default: 0, min: 0},
     comments: [{
-        commentor_id: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, "no commentor id provided"]},
-        commentor: {type: String, required: [true, "No commentor name provided"]},
+        commenter: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, "no commenter id provided"]},
         comment: {type: String, required: [true, "No comment provided"]}
     }]
   }

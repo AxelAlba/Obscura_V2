@@ -1,15 +1,8 @@
 // import json model (temporary)
-var users = require('../models/users.json');
+var Users = require('../models/users.json');
 
 //Importing the model (database)
 const userModel = require('../models/users');
-
-exports.getProfile = function(req, res) {
-    res.render('profile' , {
-        logUser : users[0],   //temporary data for the profile (would get the first user as the logged in user)
-        uid: users[0].uid //to retain in edit profile
-      });
-}
 
 exports.updateProfile = function(req, res) {//(NOT YET FINISH) (should be implemented in mongoose)
     // TODO
