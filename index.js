@@ -41,6 +41,16 @@ app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('public')); // serve static files 
 
+//setup mongoDB database URL and options
+const mongoose = require('mongoose');
+const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/test?retryWrites=true&w=majority'; 
+
+const options = { useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false };
+
+mongoose.connect(databaseURL, options);
+
 // Make the following routes available
 app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);

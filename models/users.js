@@ -26,4 +26,16 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('users', UserSchema);
+/*
+  Note:
+    Only the functions of this model should be exported, not the actual model. All the database related methods should
+    only be in the models.
+
+  example: 
+  exports.query = function(pattern, sort, next) {
+    studentModel.find({ name: { $regex: pattern } }).sort(sort).exec( function(err, students){
+        next(students); // next() == *function callback at the controller*
+    });
+  };
+*/
+//module.exports = mongoose.model('users', UserSchema);
