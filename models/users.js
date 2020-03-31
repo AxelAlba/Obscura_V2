@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema(
   {
     email: {type: String, required: [true, "No email provided"]},
     password: {type: String, required: [true, "No password provided"]},
-    userName: {type: String, required: [true, "No userName provided"]},
+    username: {type: String, required: [true, "No userName provided"]},
     firstName: {type: String, required: [true, "No firstName provided"]},
     lastName: {type: String, required: [true, "No lastName provided"]},
     profilePic: {type: String},
@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema(
          ref: 'users', 
          required: [true, 'no user id provided for followers user'],      
     }],
-    following: [{
+    followings: [{
         type: Schema.Types.ObjectId, 
         ref: 'users', 
         required: [true, 'no user id provided for following user'],      
@@ -38,4 +38,4 @@ const UserSchema = new mongoose.Schema(
     });
   };
 */
-//module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('users', UserSchema);

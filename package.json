@@ -17,6 +17,7 @@
     "mongoose": "^5.9.6"
   },
   "devDependencies": {
+    "async": "^3.2.0",
     "nodemon": "^2.0.2"
   }
 }
