@@ -43,7 +43,7 @@ app.use(express.static('public')); // serve static files
 
 //setup mongoDB database URL and options
 const mongoose = require('mongoose');
-const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/test?retryWrites=true&w=majority'; 
+const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
 
 const options = { useNewUrlParser: true,
   useUnifiedTopology: true,
