@@ -2,16 +2,21 @@
 
 {{> nav}}
 <!--Edit Profile-->
-<form action="/api/updateProfile/{{logUser.uid}}" id = 'edit'> 
+<form action="/profile" id = 'edit'> 
   <div class= "row">
     <div class = "col-3 text-center">
-        
-            <div class="form-group">
-                <img id = "uploadPreview" src = {{logUser.profilePic}} class = "rounded-circle img-fluid" alt = "profile pic">
-              <input type="file"  id="profilePic" class="form-control-file form-control-sm." onchange="PreviewImage();">
+            <div class="form-group text-center">
+              <label for="id">Obscura ID</label>
+              <input type="text" class="form-control" id="id" value='{{logUser._id}}' readonly>
             </div>
-        
-          
+            <div class="form-group text-center">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" value='{{logUser.username}}' readonly>
+            </div>
+            <div class="form-group text-center">
+              <label for="profilePic">Profile Picture URL</label>
+              <input type="text" class="form-control" id="profilePic" value='{{logUser.profilePic}}' >
+            </div>
     </div>
     <div class = "col-9 text-left">
         

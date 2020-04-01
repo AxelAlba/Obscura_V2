@@ -11,7 +11,7 @@ router.get('/getPosts', postsController.getPosts);       // get all posts
 router.get('/viewPost/:pid', postsController.viewPost);  // get single post
 
 //for the users
-router.put('/updateProfile/:uid', usersController.updateProfile);
+router.put('/updateProfile/:id', usersController.update); 
 
 
 module.exports = router;
