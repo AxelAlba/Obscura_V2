@@ -10,11 +10,12 @@
             right: 25px;
             height: auto;
             width: 50px;"></a>
-            <img src = {{logUser.profilePic}} class = "img-fluid rounded-circle" alt = "profile pic">
+            <img src = {{logUser.profilePic}} class = "img-fluid rounded-circle profilePic" alt = "Can't find profile pic">
          
         </div>
 		<div class = "col-12">
-            <h3 style = "color:black;">{{logUser.firstName}} {{logUser.lastName}}</h3>
+            <h1 style = "color:black;" class = 'display-4'>{{logUser.firstName}} {{logUser.lastName}}</h1>
+            <h4 class = "secondary" style = "color: #9F9D9D;">@{{logUser.username}}</h4>
             <p class = "lead" style = "color:black;">{{logUser.bio}}</p>
         </div>        
     </div>

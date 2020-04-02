@@ -16,7 +16,7 @@ router.get('/test', function(req,res) {
 });
 
 //for the users
-router.put('/updateProfile/:uid', usersController.updateProfile);
+router.put('/updateProfile/:id', usersController.update); 
 
 
 module.exports = router;
