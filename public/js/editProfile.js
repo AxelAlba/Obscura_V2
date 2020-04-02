@@ -1,15 +1,16 @@
 $(document).ready(() => {
-  $('#update').click(() => {
-    //get form data
-    var profilePic = $('#uploadPreview').attr('src');  
 
+  $('#edit').submit(() => {
+    //get form data
+    var profilePic = $('#profilePic').val();  
     var firstName = $('#firstName').val();  
     var lastName = $('#lastName').val();  
     var biography = $('#biography').val();  
     var email = $('#email').val(); 
     var mobileNum = $('#mobileNum').val();  
     var telNum = $('#telNum').val();  
-    var address = $('#address').val();  
+    var address = $('#address').val(); 
+
     var profile = {
       //uid 
       email: email,
@@ -27,20 +28,21 @@ $(document).ready(() => {
     };  
     
     $.ajax({
-      url: $('#edit').attr('action'), //THIS IS TO BE EDITED BY AXEL, how to enter the url of the item being edited
+      url: '/api/updateProfile/' + $('#id').val(),
       method: 'PUT',
-      data: profile, //can use $('#edit').serialize() -> KEY would be 'name' and VALUE would be 'value'
+      data: profile, 
       success: (data, status) => { 
         console.log('edit successful'); 
       },
       error: () => {
-          // what to do when the request fails?
+          console.log('edit unsuccessful');
       }
     });
   })
 });
 
 // Helper functions
+/* //prioritize image url
 function PreviewImage() {
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("profilePic").files[0]);
@@ -49,3 +51,4 @@ function PreviewImage() {
         document.getElementById("uploadPreview").src = oFREvent.target.result;
     };
 };
+*/

@@ -24,7 +24,7 @@ app.engine('hbs', hbs({ // HBS Config
   helpers: {
     count: function(array){
       var count = 0;
-      if (array.length > 0)
+      if (array != null)
       {
         for (var i = 0; i < array.length; i++)
         {
@@ -62,4 +62,5 @@ app.use('/profile', profileRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
+
 

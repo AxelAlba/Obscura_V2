@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
+const options = { useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false };
+
+mongoose.connect(databaseURL, options);
 
 const UserSchema = new mongoose.Schema(
   {
@@ -26,35 +32,26 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-/*
-  Note:
-    Only the functions of this model should be exported, not the actual model. All the database related methods should
-    only be in the models.
-
-  example: 
-  exports.query = function(pattern, sort, next) {
-    studentModel.find({ name: { $regex: pattern } }).sort(sort).exec( function(err, students){
-        next(students); // next() == *function callback at the controller*
-    });
-  };
-*/
 const UserModel = mongoose.model('users', UserSchema);
 
-//module.exports = mongoose.model('users', UserSchema); //this should not be exported
 
-exports.logUser = function (email, next) {
-  UserModel.find({email: email}, (err, result) => {
+/* 2 EXAMPLES OF QUERY */
+
+//1.) The first query can handle complex queries. However, this kind of query always returns an array of documents (Convert to object)
+UserModel.find({email: 'axel@email.com'}).exec((err, result) => {
+    if (err) throw err; //needed
+
+    result.forEach(function(doc) { //for each and toObject is require for .exec
+        console.log(doc.toObject());
+      });
+});
+
+
+//2.) The second query is for simple queries. It returns either a single object or an array of objects.
+UserModel.find({email: 'axel@email.com'}, (err, result) => {
     if (err) throw err;
     result.forEach((doc) => {
-        next(doc.toObject());
+        console.log(doc.toObject());
     });
-  });
-}
+});
 
-exports.updateUser = function (id, update, next){
-  UserModel.findByIdAndUpdate({_id: id}, update, function() {
-    UserModel.findOne({_id: id}, function(user) {
-      next(user);
-    });
-  });
-}

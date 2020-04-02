@@ -1,24 +1,31 @@
 // import json model (temporary)
 var Users = require('../models/users.json');
-
 //Importing the model (database)
-const userModel = require('../models/users');
+const UserModel = require('../models/users');
 
 exports.getProfile = function (req, res) {
-  res.render('profile', {
-    logUser: Users[0]  //temporary data for the profile (would get the first user as the logged in user)
+  var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
+  UserModel.logUser(email, function (user) {
+    console.log('logged in user profile: ' + user);
+    res.render('profile', {
+      logUser: user
+    });
   });
 }
 
-exports.update = function (req, res) {
-  res.render('editProfile', {
-    logUser: Users[0]  //temporary data for the profile (would get the first user as the logged in user)
+exports.updatePage = function (req, res) {
+  var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
+  UserModel.logUser(email, function (user) {
+    console.log('logged in user edit profile: ' + user);
+    res.render('editProfile', {
+      logUser: user
+    });
   });
 }
 
-exports.updateProfile = function(req, res) {//(NOT YET FINISH) (should be implemented in mongoose)
-    // TODO
-    var profile = {
+exports.update = function(req, res) {
+    var id = req.params.id;
+    var update = {
       //uid 
       email: req.body.email,
       //password
@@ -33,8 +40,11 @@ exports.updateProfile = function(req, res) {//(NOT YET FINISH) (should be implem
       //followers array
       //followings array
   };
-     //save to the database
-     //send it back to the client, to know that it is successful
-    res.status(200).send(student); 
-  }
+
+  UserModel.updateUser(id, update, function(user) {
+    console.log('update successful for user: ' + user);
+  });
+}
+
+
 

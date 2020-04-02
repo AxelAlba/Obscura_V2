@@ -1,3 +1,9 @@
+.profilePic {
+    height: 110%;
+    width: auto;
+    box-shadow: 0px 0px 10px black;
+}
+
 #profileHeader img {
     max-width: 50%;
     height: auto;
@@ -5,9 +11,10 @@
 
 
 #profileHead {
-    background-image: url('https://images.pexels.com/photos/326316/pexels-photo-326316.jpeg?cs=srgb&dl=close-up-of-vintage-camera-on-white-background-326316.jpg&fm=jpg');
+    background-image: url('https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v748-toon-15_1_1.jpg?w=800&dpr=1&fit=default&crop=default&auto=format&fm=pjpg&q=75&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=a6b63f918c3a6b6185470a2c9dd2f230');
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /*--- Bootstrap Padding Fix --*/
