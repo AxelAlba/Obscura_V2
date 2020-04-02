@@ -1,7 +1,7 @@
 $(document).ready(() => {
   var pid = $('#pid').val();
   $.ajax({
-    url: `/api/viewPost/${pid}`,
+    url: `/api/post/${pid}`,
     method: 'GET',
     success: (data, status) => {
       // build image-pane 

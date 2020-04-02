@@ -2,14 +2,18 @@
 Posts = require('../models/posts.json');
 
 //Importing the model (database)
-const postModel = require('../models/posts');
+const PostModel = require('../models/posts');
 
 // route handlers (CRUD)
-exports.viewPost = function(req, res) {
-  let post = Posts.filter(post => post.pid == req.params.pid)[0];
-  res.send(post);
+exports.getPost = function(req, res) {
+  PostModel.getPostById(req.params.pid, function(post) {
+    res.render('post', {post: post});
+  });
 }
 
-exports.getPosts = function (req, res) {
-  res.send(Posts);
+exports.getDiscoverPosts = function (req, res) {
+  PostModel.getDiscoverPosts(function(posts) {
+    res.send(posts);
+  })
+  //res.send(Posts);
 }

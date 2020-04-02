@@ -27,5 +27,33 @@ const PostSchema = new mongoose.Schema(
     });
   };
 */
-module.exports = mongoose.model('Post', PostSchema);
+const PostModel = mongoose.model('Post', PostSchema);
+
+//REFACTOR THIS LATER
+exports.getDiscoverPosts = function (next) {
+  PostModel.find({}, 'img')
+    .exec((err, data) => {
+      if (err) throw err;
+      var posts = [];
+      data.forEach((post) => {
+        posts.push(post.toObject());
+      });
+
+      next(posts);
+    });
+};
+
+exports.getPostById = function (id, next) {
+  PostModel.findById(id)
+    .populate('author')
+    .populate({
+      path: 'comments.commenter',
+      model: 'users'
+    })
+    .exec((err, post) => {
+      if (err) throw err;
+      next(post.toObject());
+    });
+};
+
 

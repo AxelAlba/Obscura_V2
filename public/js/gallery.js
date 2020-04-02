@@ -5,7 +5,7 @@
 
 $(document).ready(() => {
   $.ajax({
-    url: '/api/getPosts',
+    url: '/api/getDiscoverPosts',
     method: 'GET',
     success: (data, status) => {
       var gallery = $('.gallery'); 
@@ -42,50 +42,10 @@ function addToGallery(item, parentDiv) {
   var img = document.createElement('img');
   // adding attributes1
   $(img).attr('src', item.img);
-  $(link).attr('data-fancybox', '');
-
-  $(link).attr('data-type', 'inline');
-  $(link).attr('data-src', `#post-view`); //Dan, please implement post.hbs
-  
-    /*
+  $(link).attr('data-fancybox', '');    
   $(link).attr('data-type', 'ajax');
-  $(link).attr('data-src', `/api/test`);*/
-  
+  $(link).attr('data-src', `/api/post/${item._id}`);
   $(link).attr('href', 'javascript:;');
-  $(link).click(function() {
-    console.log(`hello ${item.caption}`);
-    /*$.ajax({
-      url: `/api/viewPost/${item}`,
-      method: 'GET',
-      success: (data, status) => {
-        // build image-pane 
-        var imagePane = $('#post-image-pane');
-        var img = document.createElement('img');
-        $(img).attr('src', data.image);
-        imagePane.append(img);
-
-        // build info-pane 
-        var infoPane = $('#post-info-pane');
-        data.comments.forEach((comment, index) => {
-          // call displayComment here
-          console.log(comment);
-        });
-      },
-      error: () => {
-        console.log('Error in loading post. [js/post.js]');
-      }
-    })*/
-
-    
-    var imagePane = $('#post-image-pane');
-    $(imagePane).empty();
-    var img = document.createElement('img');
-    $(img).attr('src', item.img);
-    $(img).attr('id', 'post-image');
-    $(img).css({ "max-width": "100%", "max-height": "100%", "width": "auto", "height": "auto", "margin": "0"});
-    imagePane.append(img);
-
-  });
   // appending
   $(link).append(img);
   $(linkDiv).append(link);
