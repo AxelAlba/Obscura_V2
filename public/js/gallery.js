@@ -15,13 +15,15 @@ $(document).ready(() => {
       });
       // set fancybox instance options
       $('[data-fancybox]').fancybox({
-        toolbar: false,
-        smallBtn: true,
+        toolbar: true,
+        smallBtn: false,
+        buttons: ["close"],
         infobar: false,
         iframe: {
           preload: false
         },
-        arrows: false
+        arrows: false,
+        touch: false
       })
     },
     error: () => {
@@ -38,12 +40,52 @@ function addToGallery(item, parentDiv) {
   var linkDiv = document.createElement('div');
   var link = document.createElement('a');
   var img = document.createElement('img');
-  // adding attributes
-  $(link).attr('data-fancybox', 'gallery');
-  $(link).attr('data-type', 'iframe');
-  $(link).attr('data-src', `/post/${item.pid}`); //Dan, please implement post.hbs
+  // adding attributes1
+  $(img).attr('src', item.img);
+  $(link).attr('data-fancybox', '');
+
+  $(link).attr('data-type', 'inline');
+  $(link).attr('data-src', `#post-view`); //Dan, please implement post.hbs
+  
+    /*
+  $(link).attr('data-type', 'ajax');
+  $(link).attr('data-src', `/api/test`);*/
+  
   $(link).attr('href', 'javascript:;');
-  $(img).attr('src', item.image);
+  $(link).click(function() {
+    console.log(`hello ${item.caption}`);
+    /*$.ajax({
+      url: `/api/viewPost/${item}`,
+      method: 'GET',
+      success: (data, status) => {
+        // build image-pane 
+        var imagePane = $('#post-image-pane');
+        var img = document.createElement('img');
+        $(img).attr('src', data.image);
+        imagePane.append(img);
+
+        // build info-pane 
+        var infoPane = $('#post-info-pane');
+        data.comments.forEach((comment, index) => {
+          // call displayComment here
+          console.log(comment);
+        });
+      },
+      error: () => {
+        console.log('Error in loading post. [js/post.js]');
+      }
+    })*/
+
+    
+    var imagePane = $('#post-image-pane');
+    $(imagePane).empty();
+    var img = document.createElement('img');
+    $(img).attr('src', item.img);
+    $(img).attr('id', 'post-image');
+    $(img).css({ "max-width": "100%", "max-height": "100%", "width": "auto", "height": "auto", "margin": "0"});
+    imagePane.append(img);
+
+  });
   // appending
   $(link).append(img);
   $(linkDiv).append(link);

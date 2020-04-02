@@ -1,5 +1,45 @@
-.fancybox-slide--iframe .fancybox-content {
-    width  : 70%;
+/*.modal-container {
+    width  : 90%;
     height : 90%;
     margin: 0;
+    padding: 0;
+}
+
+.modal-container div {
+    padding: 0;
+}
+
+#post-image-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 990px;
+}
+
+#post-image { 
+    max-width: 100%; 
+    max-height: 100%; 
+    width: auto; 
+    height: auto;
+}*/
+
+
+#post-view {
+    width: 80vw;
+    height: 90vh;
+    padding: 0;
+}
+
+#post-image-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 90vh;
+    padding: 5;
+}
+
+#post-info-pane {
+    background-color: blue;
 }
