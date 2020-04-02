@@ -42,7 +42,7 @@ const UserModel = mongoose.model('users', UserSchema);
 
 //module.exports = mongoose.model('users', UserSchema); //this should not be exported
 
-exports.logUser = function (email, next) {
+exports.getUser = function (email, next) {
   UserModel.find({email: email}, (err, result) => {
     if (err) throw err;
     result.forEach((doc) => {
