@@ -9,6 +9,7 @@ const usersController = require('../controllers/usersController.js');
 //for the posts
 router.get('/getDiscoverPosts', postsController.getDiscoverPosts);       // get all posts
 router.get('/post/:pid', postsController.getPost);  // get single post
+router.post('/post/:pid/comment/create', postsController.createComment);
 
 //for the users
 router.put('/updateProfile/:id', usersController.update); 

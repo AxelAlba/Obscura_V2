@@ -1,30 +1,31 @@
 $(document).ready(() => {
-  var pid = $('#pid').val();
-  $.ajax({
-    url: `/api/post/${pid}`,
-    method: 'GET',
-    success: (data, status) => {
-      // build image-pane 
-      var imagePane = $('.image-pane');
-      var img = document.createElement('img');
-      $(img).attr('src', data.image);
-      imagePane.append(img);
-      
-      // build info-pane 
-      var infoPane = $('.info-pane');
-      data.comments.forEach((comment, index) => {
-        // call displayComment here
-        console.log(comment);
-      });
-    },
-    error: () => {
-      console.log('Error in loading post. [js/post.js]');
-    }
-  })
+  $('#comment-btn').click(function(event) {
+    event.preventDefault(); // PREVENT REFRESH
+    // get post id
+    var pid = $('#pid').val();
+    // get comment
+    var commentBox = $('#comment-box')
+    var comment = commentBox.val();
+    // empty string handler
+    if (comment == '') { return }
+    // ajax POST
+    $.ajax({
+      url: `/api/post/${pid}/comment/create`,
+      method: "POST",
+      data: {
+        commenter: "5e8353af47a78000842d1450", // user_id 
+        comment: comment
+      },
+      success: (data, status) => {
+        console.log('success', data);
+        // dom building here...
+      },
+      error: () => {
+        console.log('error submitting comment.');
+      }
+    });
+    console.log(comment);
+    commentBox.val('');
+  });
 });
-
-// helper functions
-function displayComment(comment, parentDiv) {
-  ;
-}
 

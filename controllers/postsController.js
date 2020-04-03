@@ -17,3 +17,9 @@ exports.getDiscoverPosts = function (req, res) {
   })
   //res.send(Posts);
 }
+
+exports.createComment = function (req, res) {
+  PostModel.createComment(req.params.pid, req.body.commenter, req.body.comment, function (comment) {
+    res.send(comment);
+  });
+}

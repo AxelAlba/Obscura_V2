@@ -45,4 +45,31 @@ exports.getPostById = function (id, next) {
     });
 };
 
+exports.createComment = function (id, commenter, comment, next) {
+  PostModel.findOneAndUpdate(
+    { _id: id },
+    { $push: { comments: {commenter: commenter, comment: comment} } }
+  )
+  .exec((err, success) => {
+    if (err) throw err;
+    next(success);
+  });
+  /*
+  Post.comments.push({
+    commenter: commenter,
+    comment: comment
+  });
+  next(Post._id,Post.comments);*/
+  /*PostModel.findById(id)
+    .populate('author')
+    .populate({
+      path: 'comments.commenter',
+      model: 'users'
+    })
+    .exec((err, post) => {
+      if (err) throw err;
+      next(post.toObject());
+    });*/
+};
+
 

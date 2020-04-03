@@ -1,3 +1,6 @@
+<!-- required script -->
+<script src="/js/post.js"></script> 
+<input type="hidden" id="pid" value={{post._id}}>
 <div class="modal-container">
   <div class="modal-body">
     <div class="container-fluid">
@@ -12,7 +15,7 @@
           <header class="p-3 mb-2" id="info-pane-header">
             <div class="row mx-auto">
               <div class="col-2 pr-2">
-                <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
+                <img src={{post.author.profilePic}} class="profile-pic mb-0 rounded-circle">
               </div>
               <div class="col-10">
                 <div class="row mx-auto">
@@ -37,49 +40,7 @@
             <div class="comment">
               <div class="row mx-auto">
                 <div class="col-2 pr-2">
-                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
-                </div>
-                <div class="col-10">
-                  <div class="row mx-auto">
-                    <a href="" class="no-underline">
-                      <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
-                    </a>
-                  </div>
-                  <div class="row mx-auto">
-                    <p class="my-0">{{this.comment}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-          {{/each}}
-          {{#each post.comments}}
-          <ul class="px-3">
-            <div class="comment">
-              <div class="row mx-auto">
-                <div class="col-2 pr-2">
-                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
-                </div>
-                <div class="col-10">
-                  <div class="row mx-auto">
-                    <a href="" class="no-underline">
-                      <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
-                    </a>
-                  </div>
-                  <div class="row mx-auto">
-                    <p class="my-0">{{this.comment}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-          {{/each}}
-          {{#each post.comments}}
-          <ul class="px-3">
-            <div class="comment">
-              <div class="row mx-auto">
-                <div class="col-2 pr-2">
-                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
+                  <img src={{this.commenter.profilePic}} class="profile-pic mb-0 rounded-circle">
                 </div>
                 <div class="col-10">
                   <div class="row mx-auto">
@@ -100,7 +61,7 @@
             <div class="likes px-3 pt-3">
               <p><strong>{{post.likes}}</strong> likes</p>
             </div>
-            <form action="" class="px-3">
+            <form class="px-3">
               <div class="input-group input-group-lg m-0">
                 <textarea 
                   type="text" 
@@ -109,7 +70,7 @@
                   placeholder="Write a comment..."
                 ></textarea>
                 <div class="input-group-append">
-                  <button id="button-addon2" type="submit" class="btn btn-link"><i
+                  <button id="comment-btn" class="btn btn-link"><i
                       class="material-icons" id="comment-icon">send</i></button>
                 </div>
               </div>
