@@ -5,7 +5,7 @@ const UserModel = require('../models/users');
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.logUser(email, function (user) {
+  UserModel.getUser(email, function (user) {
     console.log('logged in user profile: ' + user);
     res.render('profile', {
       logUser: user
@@ -13,9 +13,9 @@ exports.getProfile = function (req, res) {
   });
 }
 
-exports.updatePage = function (req, res) {
+exports.settings = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.logUser(email, function (user) {
+  UserModel.getUser(email, function (user) {
     console.log('logged in user edit profile: ' + user);
     res.render('editProfile', {
       logUser: user
