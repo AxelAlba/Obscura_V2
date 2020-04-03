@@ -2,51 +2,79 @@
   <div class="modal-body">
     <div class="container-fluid">
       <div class="row mx-auto">
+        <!-- Image Pane -->
         <div class="col-9" id="post-image-pane">
-          <img src={{post.img}} alt="" id="post-image">
+          <img src={{post.img}} class="m-0" id="post-image">
         </div>
-        <div class="col-3" id="post-info-pane">
-          <header>
+        <!-- Info Pane -->
+        <div class="col-3" class="pt-0" id="post-info-pane">
+          <!-- Header -->
+          <header class="p-3 mb-2" id="info-pane-header">
             <div class="row mx-auto">
-              <div class="col-2">
-                IMAGE
+              <div class="col-2 pr-2">
+                <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
               </div>
               <div class="col-10">
-                <a href=""><h5>{{post.author.firstName}}</h5></a>
-              </div>
-            </div>
-            <div class="row mx-auto">
-              <div class="col-10 ml-auto">
-                <h5>@{{post.author.username}}</h5>
+                <div class="row mx-auto">
+                  <a href="" class="no-underline">
+                    <h5 class="my-0 primary-color-light">{{post.author.firstName}}</h5>
+                  </a>
+                </div>
+                <div class="row mx-auto">
+                  <p class="my-0">@{{post.author.username}}</p>
+                </div>
               </div>
             </div>
           </header>
-          <p>{{post.caption}}</p>
-          <p>Likes: {{post.likes}}</p>
+          <!-- Post Details -->
+          <div id="info-pane-details" class="px-3 pb-3">
+            <p class="lead">{{post.title}}</p>
+            <p>{{post.caption}}</p>
+          </div>
+          <!-- Comments Section -->
           {{#each post.comments}}
-            <ul>
-              <h5>{{this.commenter.username}}</h5>
-              <p>{{this.comment}}</p>
-            </ul>
-          {{/each}}
-          {{#each post.comments}}
-          <ul>
-            <h5>{{this.commenter.username}}</h5>
-            <p>{{this.comment}}</p>
+          <ul class="px-3">
+            <div class="comment">
+              <div class="row mx-auto">
+                <div class="col-2 pr-2">
+                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
+                </div>
+                <div class="col-10">
+                  <div class="row mx-auto">
+                    <a href="" class="no-underline">
+                      <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
+                    </a>
+                  </div>
+                  <div class="row mx-auto">
+                    <p class="my-0">{{this.comment}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </ul>
           {{/each}}
-          {{#each post.comments}}
-          <ul>
-            <h5>{{this.commenter.username}}</h5>
-            <p>{{this.comment}}</p>
-          </ul>
-          {{/each}}
+          <!-- Footer -->         
           <div id="info-pane-footer">
-            WRITE A COMMENT HERE
+            <div class="likes px-3 pt-3">
+              <p><strong>{{post.likes}}</strong> likes</p>
+            </div>
+            <form action="" class="px-3">
+              <div class="input-group input-group-lg m-0">
+                <textarea 
+                  type="text" 
+                  class="form-control p-0" 
+                  id="comment-box" 
+                  placeholder="Write a comment..."
+                ></textarea>
+                <div class="input-group-append">
+                  <button id="button-addon2" type="submit" class="btn btn-link"><i
+                      class="material-icons" id="comment-icon">send</i></button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
 </div>

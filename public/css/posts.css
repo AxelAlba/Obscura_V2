@@ -6,6 +6,7 @@
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    color: #F8F8F8;
 }
 
 .modal-container::-webkit-scrollbar { /* WebKit */
@@ -23,7 +24,6 @@
     align-items: center;
     width: auto;
     height: 90vh;
-    padding: 5;
     position: sticky;
     top: 0;
 }
@@ -33,25 +33,58 @@
     max-height: 100%; 
     width: auto; 
     height: auto;
-    margin: 0;
 }
 
 #post-info-pane {
-    padding-top: 0;
-
+    background-color: #464246;
 }
 
-#post-info-pane header {
-    background-color: whitesmoke;
+#info-pane-header {
     position: sticky;
     top: 0;
-    padding: 20px;
+    z-index: 1; 
 }
 
-#post-info-pane #info-pane-footer {
-    background-color: red;
+#info-pane-footer {
     position: sticky;
     bottom: 0;
-    padding: 20px;
+    z-index: 1;
 }
+
+.profile-pic {
+    max-width: 48px;
+    max-height: 48px;
+}
+
+#comment-box {
+    color: #F8F8F8;
+    background-color: rgba(0, 0, 0, 0);
+    border:none;
+}
+
+#comment-box::placeholder {
+    color: #F8F8F8;
+}
+
+#comment-icon {
+    color: #EADDCC;
+}
+
+#comment-box::-webkit-scrollbar { /* WebKit */
+    width: 4px;
+    background: #EADDCC;
+}
+
+#comment-box::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #464246;
+}
+
+.form-control:focus{
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
 
