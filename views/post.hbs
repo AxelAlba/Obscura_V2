@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row mx-auto">
         <!-- Image Pane -->
-        <div class="col-9" id="post-image-pane">
+        <div class="col-12" id="post-image-pane">
           <img src={{post.img}} class="m-0" id="post-image">
         </div>
         <!-- Info Pane -->
@@ -28,10 +28,52 @@
           </header>
           <!-- Post Details -->
           <div id="info-pane-details" class="px-3 pb-3">
-            <p class="lead">{{post.title}}</p>
+            <h4>{{post.title}}</h4>
             <p>{{post.caption}}</p>
           </div>
           <!-- Comments Section -->
+          {{#each post.comments}}
+          <ul class="px-3">
+            <div class="comment">
+              <div class="row mx-auto">
+                <div class="col-2 pr-2">
+                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
+                </div>
+                <div class="col-10">
+                  <div class="row mx-auto">
+                    <a href="" class="no-underline">
+                      <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
+                    </a>
+                  </div>
+                  <div class="row mx-auto">
+                    <p class="my-0">{{this.comment}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+          {{/each}}
+          {{#each post.comments}}
+          <ul class="px-3">
+            <div class="comment">
+              <div class="row mx-auto">
+                <div class="col-2 pr-2">
+                  <img src="img/placeholder-round.PNG" class="profile-pic mb-0">
+                </div>
+                <div class="col-10">
+                  <div class="row mx-auto">
+                    <a href="" class="no-underline">
+                      <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
+                    </a>
+                  </div>
+                  <div class="row mx-auto">
+                    <p class="my-0">{{this.comment}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ul>
+          {{/each}}
           {{#each post.comments}}
           <ul class="px-3">
             <div class="comment">
