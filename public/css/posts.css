@@ -36,7 +36,7 @@
 }
 
 #post-info-pane {
-    background-color: #464246;
+    background-color: rgba(70, 66, 70, 0.98);
 }
 
 #info-pane-header {
@@ -47,10 +47,10 @@
 }
 
 #info-pane-footer {
-    background-color: #464246;
     position: sticky;
     bottom: 0;
     z-index: 1;
+    background-color: #464246;
 }
 
 .profile-pic {

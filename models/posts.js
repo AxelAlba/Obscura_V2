@@ -47,29 +47,22 @@ exports.getPostById = function (id, next) {
 
 exports.createComment = function (id, commenter, comment, next) {
   PostModel.findOneAndUpdate(
-    { _id: id },
-    { $push: { comments: {commenter: commenter, comment: comment} } }
-  )
-  .exec((err, success) => {
-    if (err) throw err;
-    next(success);
-  });
-  /*
-  Post.comments.push({
-    commenter: commenter,
-    comment: comment
-  });
-  next(Post._id,Post.comments);*/
-  /*PostModel.findById(id)
-    .populate('author')
-    .populate({
-      path: 'comments.commenter',
-      model: 'users'
+    { _id: id }, // find post by ID
+    { $push: { comments: {commenter: commenter, comment: comment} } }, // push to comments[]
+    { 
+      fields: { comments: { '$slice': -1 } }, // get last element of comments[]
+      new: true // new: true returns the updated doc, must be defined last
+    } 
+  ).populate({ // populate to get commenter details
+    path: 'comments.commenter',
+    select: 'profilePic username', // REPLACE WITH FULL NAME VIRTUAL
+    model: 'users'
     })
-    .exec((err, post) => {
+    .exec((err, success) => {
       if (err) throw err;
-      next(post.toObject());
-    });*/
+      var commentDetails = success.comments[0]; // select comment created by user
+      next(commentDetails);
+    });
 };
 
 

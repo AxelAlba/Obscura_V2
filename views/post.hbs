@@ -35,9 +35,9 @@
             <p>{{post.caption}}</p>
           </div>
           <!-- Comments Section -->
-          {{#each post.comments}}
-          <ul class="px-3">
-            <div class="comment">
+          <div id="comments-section">
+            {{#each post.comments}}
+            <ul class="px-3">
               <div class="row mx-auto">
                 <div class="col-2 pr-2">
                   <img src={{this.commenter.profilePic}} class="profile-pic mb-0 rounded-circle">
@@ -53,9 +53,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </ul>
-          {{/each}}
+            </ul>
+            {{/each}}
+          </div>
           <!-- Footer -->         
           <div id="info-pane-footer">
             <div class="likes px-3 pt-3">
