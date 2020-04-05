@@ -42,6 +42,19 @@ app.engine('hbs', hbs({ // HBS Config
 }));
 
 // Setup middlewares
+app.use(session({
+  secret: 'somegibberishsecret',
+  store: new MongoStore ({
+    host: '127.0.0.1',
+    port: '27017',
+    db: 'session',
+    url: 'mongodb://localhost:27017/demo'
+}),
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 }
+}));
+app.use(flash());
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('public')); // serve static files 
@@ -109,21 +122,8 @@ app.use(express.session({
     store: sessionStore
 }));
 */
-app.use(session({
-  secret: 'somegibberishsecret',
-  store: new MongoStore ({
-    host: '127.0.0.1',
-    port: '27017',
-    db: 'session',
-    url: 'mongodb://localhost:27017/demo'
-}),
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 }
-}));
-
 // Flash
-app.use(flash());
+
 
 // Global messages vars
 app.use((req, res, next) => {
