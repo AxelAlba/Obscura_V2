@@ -15,17 +15,54 @@ const PostSchema = new mongoose.Schema(
   }
 );
 
-/*
-  Note:
-    Only the functions of this model should be exported, not the actual model. All the database related methods should
-    only be in the models.
+const PostModel = mongoose.model('Post', PostSchema);
 
-  example: 
-  exports.query = function(pattern, sort, next) {
-    studentModel.find({ name: { $regex: pattern } }).sort(sort).exec( function(err, students){
-        next(students); // next() == *function callback at the controller*
+// Get all Posts
+exports.getDiscoverPosts = function (next) {
+  PostModel.find({}, 'img') // Add filter for not followed
+    .exec((err, data) => {
+      if (err) throw err;
+
+      var posts = [];
+      data.forEach((post) => {
+        posts.push(post.toObject());
+      });
+
+      next(posts);
     });
-  };
-*/
-module.exports = mongoose.model('Post', PostSchema);
+};
+
+exports.getPostById = function (id, next) {
+  PostModel.findById(id)
+    .populate('author')
+    .populate({
+      path: 'comments.commenter',
+      model: 'users'
+    })
+    .exec((err, post) => {
+      if (err) throw err;
+      next(post.toObject());
+    });
+};
+
+exports.createComment = function (id, commenter, comment, next) {
+  PostModel.findOneAndUpdate(
+    { _id: id }, // find post by ID
+    { $push: { comments: {commenter: commenter, comment: comment} } }, // push to comments[]
+    { 
+      fields: { comments: { '$slice': -1 } }, // get last element of comments[]
+      new: true // new: true returns the updated doc, must be defined last
+    } 
+  ).populate({ // populate to get commenter details
+    path: 'comments.commenter',
+    select: 'profilePic username', // REPLACE WITH FULL NAME VIRTUAL
+    model: 'users'
+    })
+    .exec((err, success) => {
+      if (err) throw err;
+      var commentDetails = success.comments[0]; // select comment created by user
+      next(commentDetails);
+    });
+};
+
 

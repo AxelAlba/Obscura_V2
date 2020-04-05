@@ -7,8 +7,9 @@ const usersController = require('../controllers/usersController.js');
 // routes and route handlers (controllers)
 
 //for the posts
-router.get('/getPosts', postsController.getPosts);       // get all posts
-router.get('/viewPost/:pid', postsController.viewPost);  // get single post
+router.get('/getDiscoverPosts', postsController.getDiscoverPosts);       // get all posts
+router.get('/post/:pid', postsController.getPost);  // get single post
+router.post('/post/:pid/comment/create', postsController.createComment);
 
 //for the users
 router.put('/updateProfile/:id', usersController.update); 
