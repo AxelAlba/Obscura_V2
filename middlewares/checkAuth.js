@@ -1,3 +1,4 @@
+/*
 exports.isPrivate = (req, res, next) => {
     // Must be authenticated to go to the next function
     if (req.session.user) {
@@ -15,3 +16,4 @@ exports.isPrivate = (req, res, next) => {
       return next();
     }
   }
+*/
