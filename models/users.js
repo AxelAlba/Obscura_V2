@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require('./connection');
 const Schema = mongoose.Schema;
-
+// LOG-IN AND REGISTRATION AUTHENTICATION PART
 const UserSchema = new mongoose.Schema(
   {
     email: {type: String, required: [true, "No email provided"]},
-    password: {type: String, required: [true, "No password provided"]},
+    password: {type: String, min: 6, required: [true, "No password provided"]},
     username: {type: String, required: [true, "No userName provided"]},
     firstName: {type: String, required: [true, "No firstName provided"]},
     lastName: {type: String, required: [true, "No lastName provided"]},
@@ -22,9 +22,36 @@ const UserSchema = new mongoose.Schema(
         type: Schema.Types.ObjectId, 
         ref: 'users', 
         required: [true, 'no user id provided for following user'],      
-    }]
+    }],
+    date: { type: Date, default: Date.now }
   }
 );
+
+const User = mongoose.model('users', UserSchema);
+
+// Saving a user given the validated object
+exports.create = function(obj, next) {
+  const user = new User(obj);
+
+  user.save(function(err, user) {
+    next(err, user);
+  });
+};
+
+// Retrieving a user based on ID
+exports.getById = function(id, next) {
+  User.findById(id, function(err, user) {
+    next(err, user);
+  });
+};
+
+// Retrieving just ONE user based on a query (first one)
+exports.getOne = function(query, next) {
+  User.findOne(query, function(err, user) {
+    next(err, user);
+  });
+};
+// END OF USER CREATION PART
 
 /*
   Note:

@@ -7,6 +7,7 @@ const postModel = require('../models/posts');
 // route handlers (CRUD)
 exports.viewPost = function(req, res) {
   let post = Posts.filter(post => post.pid == req.params.pid)[0];
+  console.log(post);
   res.send(post);
 }
 

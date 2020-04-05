@@ -209,7 +209,7 @@ h6 {
 #intro .intro-info .btn-get-started,
 #intro .intro-info .btn-services {
   position: relative;
-  top: 50%;
+  top: 100%;
   margin: auto;
   font-family: "Lato";
   font-style: normal;
@@ -271,6 +271,17 @@ h6 {
 .main-nav li:hover > a {
   color: #ffffff;
   text-decoration: none;
+}
+
+.wrapper {
+  text-align: center;
+  border-color: #000000;
+  border-style: solid;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
 }
 
 /* About Us Section
