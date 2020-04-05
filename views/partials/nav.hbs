@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/css/navbar.css">
 <script src="/js/app.js" async></script>
+<!--<script src="/js/search.js"></script>-->
+
 <!-- overlay containers -->
 
 <div id="overlay" onclick="off()">
@@ -22,16 +24,17 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <!-- search bar -->
-      <form action="" class="searchBar">
+      <form action = '/api/search' class="searchBar" id = "searchBar">
         <div class="bg-light border rounded rounded-pill shadow-sm">
           <div class="input-group">
             <div class="input-group-prepend">
-              <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i
+              <button id="button-addon2" type="submit" class="btn btn-link text-warning searchButton"><i
                   class="material-icons">search</i></button>
             </div>
             <input type="search" placeholder="search for creators around the world" aria-describedby="button-addon2"
-              class="form-control border-0 bg-light">
+              class="form-control border-0 bg-light" id = 'search' name = 'search'>
           </div>
         </div>
       </form>
