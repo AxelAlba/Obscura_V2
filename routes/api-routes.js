@@ -12,6 +12,6 @@ router.get('/viewPost/:pid', postsController.viewPost);  // get single post
 
 //for the users
 router.put('/updateProfile/:id', usersController.update); 
-router.get('/search', usersController.search);
+router.get('/searchUser', usersController.search);
 
 module.exports = router;
