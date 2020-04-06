@@ -64,5 +64,3 @@ exports.createComment = function (id, commenter, comment, next) {
       next(commentDetails);
     });
 };
-
-
