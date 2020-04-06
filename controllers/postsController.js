@@ -1,6 +1,3 @@
-// import json model (temporary)
-Posts = require('../models/posts.json');
-
 //Importing the model (database)
 const PostModel = require('../models/posts');
 
