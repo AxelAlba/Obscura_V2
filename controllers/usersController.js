@@ -1,5 +1,3 @@
-// import json model (temporary)
-var Users = require('../models/users.json');
 //Importing the model (database)
 const UserModel = require('../models/users');
 
