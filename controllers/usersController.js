@@ -5,7 +5,7 @@ const UserModel = require('../models/users');
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUser(email, function (user) {
+  UserModel.getUserByEmail(email, function (user) { //should use getUserByID if the logged in user is already implemented
     console.log('logged in user profile: ' + user);
     res.render('profile', {
       logUser: user
@@ -15,7 +15,7 @@ exports.getProfile = function (req, res) {
 
 exports.settings = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUser(email, function (user) {
+  UserModel.getUserByEmail(email, function (user) { //same with getProfile
     console.log('logged in user edit profile: ' + user);
     res.render('editProfile', {
       logUser: user
@@ -46,5 +46,21 @@ exports.update = function(req, res) {
   });
 }
 
+exports.search = function (req, res) {
+  var search = req.query.search;
+  UserModel.searchUser(search, { username: 1 }, function(userObjects) {
+    res.render('search', {
+      users: userObjects 
+    });
+  })
+}
 
+exports.getUser = function (req, res) {
+  var id = req.params.uid;
+  UserModel.getUserById(id, function(user) {
+    res.render('otherProfile', {
+      user: user
+    })
+  });
+}
 

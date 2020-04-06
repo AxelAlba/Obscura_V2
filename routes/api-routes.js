@@ -13,6 +13,6 @@ router.post('/post/:pid/comment/create', postsController.createComment);
 
 //for the users
 router.put('/updateProfile/:id', usersController.update); 
-
+router.get('/searchUser', usersController.search);
 
 module.exports = router;

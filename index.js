@@ -10,6 +10,9 @@ const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
 
+//security and authentication
+const session = require('express-session');
+
 // create express app
 const port = 3000;
 const app = express();
@@ -39,6 +42,8 @@ app.engine('hbs', hbs({ // HBS Config
 // Setup middlewares
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
+app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false})); //for sessions
+
 app.use(express.static('public')); // serve static files 
 
 //setup mongoDB database URL and options
@@ -52,10 +57,13 @@ const options = { useNewUrlParser: true,
 mongoose.connect(databaseURL, options);
 
 // Make the following routes available
-app.use('/api', apiRouter); // make API available
+    //this block should be in the indexRouter (public)
 app.use('/', indexRouter);
 app.use('/login', loginRouter);     
 app.use('/signup', signupRouter);  
+
+    //this block should  be in the homeRouter (private) (should have /home first for the logged-in user)
+app.use('/api', apiRouter); 
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);

@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model('users', UserSchema);
 
-exports.getUser = function (email, next) {
+exports.getUserByEmail = function (email, next) {
   UserModel.find({email: email}, (err, result) => {
     if (err) throw err;
     result.forEach((doc) => {
@@ -42,5 +42,23 @@ exports.updateUser = function (id, update, next){
     UserModel.findOne({_id: id}, function(user) {
       next(user);
     });
+  });
+}
+
+exports.searchUser = function (search, sort, next){
+  UserModel.find({username: {$regex: search}}).sort(sort).exec(function(err, result){ 
+    if (err) throw err;
+    var userObjects = [];
+    result.forEach(function(doc) {
+      userObjects.push(doc.toObject());
+    });
+    next(userObjects);
+  });
+}
+
+exports.getUserById = function (id, next) {
+  UserModel.findById(id, (err, user) => {
+    if (err) throw err;
+    next(user.toObject());
   });
 }
