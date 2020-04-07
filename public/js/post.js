@@ -22,8 +22,11 @@ $(document).ready(() => {
         comment: comment
       },
       success: (data, status) => {
-        addComment(data); // Append comment to DOM
-        var height = $("#comments-section").height() * 2; // big enough to ensure that it scrolls down to the bottom
+        // Append comment to DOM
+        addComment(data); 
+
+        // big enough to ensure that it scrolls down to the bottom
+        var height = $("#comments-section").height() * 2;
 
         // scroll to bottom to see latest comment
         $(".modal-container").animate({ scrollTop: height}, "slow");
