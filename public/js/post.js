@@ -1,47 +1,61 @@
+/*
+  Functions related to Posts goes here.
+*/
+
 $(document).ready(() => {
+  var commentBox = $('#comment-box'); // get comment box
+  var postId = $('#pid').val(); // get post id of the post you're viewing
+
+  // Add click event handler
   $('#comment-btn').click(function(event) {
-    // prevent refresh
-    event.preventDefault(); 
-    
-    // get post id
-    var pid = $('#pid').val();
-
-    // get comment
-    var commentBox = $('#comment-box')
-    var comment = commentBox.val();
-
-    // if empty string, don't execute further
-    if (comment == '') { return }
-
-    // if not empty string, execute ajax POST 
-    $.ajax({
-      url: `/api/post/${pid}/comment/create`,
-      method: "POST",
-      data: {
-        commenter: "5e8b098057612101fcfee99f", // temporary user_id 
-        comment: comment
-      },
-      success: (data, status) => {
-        // Append comment to DOM
-        addComment(data); 
-
-        // big enough to ensure that it scrolls down to the bottom
-        var height = $("#comments-section").height() * 2;
-
-        // scroll to bottom to see latest comment
-        $(".modal-container").animate({ scrollTop: height}, "slow");
-
-        // RESET COMMENT BOX
-        commentBox.val('');
-      },
-      error: () => {
-        console.log('error submitting comment.');
-      }
-    }); 
+    event.preventDefault(); // prevent refresh
+    addCommentHandler(postId, commentBox);
   });
 });
 
-function addComment(data) {
+// Create comment to DB
+function addCommentHandler(postToCommentOn, commentBox) {
+  // get comment value
+  var comment = commentBox.val();
+
+  // if empty string, don't execute further
+  if (comment == '') { return }
+
+  // if not empty string, execute ajax POST 
+  $.ajax({
+    url: `/api/post/${postToCommentOn}/comment/create`,
+    method: "POST",
+    data: {
+      commenter: "5e8b098057612101fcfee99f", // temporary user_id 
+      comment: comment
+    },
+    success: (data, status) => {
+      renderComment(data);      
+      scrollToBottom();         
+      resetCommentBox(commentBox);
+    },
+    error: () => {
+      console.log('error submitting comment.');
+    }
+  });
+}
+
+// Resets comment box to empty string
+function resetCommentBox(commentBox) {
+  commentBox.val('');
+}
+
+// Scroll to the most bottom part of the modal
+function scrollToBottom() {
+  // big enough to ensure that it scrolls down to the bottom
+  var height = $("#comments-section").height() * 5;
+
+  // scroll to bottom to see latest comment
+  $(".modal-container").animate({ scrollTop: height }, "slow");
+}
+
+// Append comment to DOM
+function renderComment(data) {
   var parentDiv = $("#comments-section");
   var ul = document.createElement('ul');
   var divRowParent = document.createElement('div');

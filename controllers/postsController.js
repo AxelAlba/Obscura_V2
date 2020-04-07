@@ -1,5 +1,5 @@
 //Importing the model (database)
-const PostModel = require('../models/posts');
+const PostModel = require('../models/PostModel');
 
 // route handlers (CRUD)
 // returns post view

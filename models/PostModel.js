@@ -52,15 +52,14 @@ exports.createComment = function (id, commenter, comment, next) {
     { 
       fields: { comments: { '$slice': -1 } }, // get last element of comments[]
       new: true // new: true returns the updated doc, must be defined last
-    } 
-  ).populate({ // populate to get commenter details
-    path: 'comments.commenter',
-    select: 'profilePic username', // REPLACE WITH FULL NAME VIRTUAL
-    model: 'users'
-    })
-    .exec((err, success) => {
-      if (err) throw err;
-      var commentDetails = success.comments[0]; // select comment created by user
-      next(commentDetails);
-    });
+    }).populate({ // populate to get commenter details
+        path: 'comments.commenter',
+        select: 'profilePic username', // REPLACE WITH FULL NAME VIRTUAL
+        model: 'users'
+      })
+      .exec((err, success) => {
+        if (err) throw err;
+        var commentDetails = success.comments[0]; // select comment created by user (it's the only comment in the [])
+        next(commentDetails);
+      });
 };
