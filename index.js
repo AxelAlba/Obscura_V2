@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
-const indexRouter = require('./routes/index.js');
+const indexRouter = require('./routes/landing.js');
 const loginRouter = require('./routes/login.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
