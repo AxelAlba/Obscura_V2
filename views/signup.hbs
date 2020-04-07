@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <link href= "css/SignUpPage.css" rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-    <script src="js/checkpass.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
+<!-- imports -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+<link href= "css/SignUpPage.css" rel='stylesheet'>
+<script src="js/checkpass.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
+<!-- Sign up page -->
+<body>
+  <div class="container">
+    <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-center">Sign Up to Obscura</h5>
-          <form class="form-signin" action = "/">
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
-            <label for="inputEmail">Email address</label>
+          <div class="card-body">
+            <h5 class="card-title text-center">Sign Up to Obscura</h5>
+            <form class="form-signin" action="/">
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
+                <label for="inputEmail">Email address</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" required>
+                <label for="inputUsername">Username</label>
+              </div>
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Password</label>
+              </div>
+              <div class="form-label-group">
+                <input type="password" id="retypePassword" class="form-control" placeholder="Password" required>
+                <label for="retypePassword">Re-enter Password</label>
+              </div>
+              <div class="custom-control custom-checkbox mb-3">
+                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                <label class="custom-control-label" for="customCheck1">I Agree to the Terms and Conditions</label>
+              </div>
+              <p class="blockquote-footer" id="warning"></p>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-login btn-block text-uppercase" input type="submit" onclick="checkEqual"
+                id="submit"><i class="fab   fa-login mr-2"></i>Register</button>
+            </form>
           </div>
-
-          <div class="form-label-group">
-            <input type="text" id="inputUsername" class="form-control" placeholder="Username" required>
-            <label for="inputUsername">Username</label>
-          </div>
-          
-          <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <label for="inputPassword">Password</label>
-          </div>
-
-          <div class="form-label-group">
-            <input type="password" id="retypePassword" class="form-control" placeholder="Password" required>
-            <label for="retypePassword">Re-enter Password</label>
-          </div>
-          
-          <div class="custom-control custom-checkbox mb-3">
-            <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-            <label class="custom-control-label" for="customCheck1">I Agree to the Terms and Conditions</label>
-          </div>
-
-          <p class = "blockquote-footer" id = "warning"></p>
-          <hr class="my-4">
-          <button class="btn btn-lg btn-login btn-block text-uppercase" input type="submit" onclick = "checkEqual" id = "submit"><i class="fab fa-login mr-2"></i>Register</button>
-          </form>
-          <script type = "text/javascript" src = "js/signup.js"></script>
         </div>
-        </div>
-      </div>
       </div>
     </div>
-    </body>
-</html>
+  </div>
+</body>
