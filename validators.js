@@ -1,12 +1,12 @@
-const { body } = require('express-validator');
+/* const { body } = require('express-validator');
 
 const registerValidation = [
-  // Name should not be empty
-  body('name').not().isEmpty().withMessage("Name is required."),
-
   // Email should not be empty and must be a valid email
-  body('email').not().isEmpty().withMessage("Email is required.")
-    .isEmail().withMessage("Please provide a valid email."),
+  body('inputEmail').not().isEmpty().withMessage("Email is required.")
+  .isEmail().withMessage("Please provide a valid email."),
+
+  // Name should not be empty
+  body('inputName').not().isEmpty().withMessage("Name is required."),
 
   // Password needs to be min 6 chars
   body('password').isLength({ min: 6 }).withMessage("Password must be at least 6 characters long."),
@@ -30,3 +30,4 @@ const loginValidation = [
   ];
 
 module.exports = { registerValidation, loginValidation };
+*/

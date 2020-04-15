@@ -3,7 +3,8 @@ var Users = require('../models/users.json');
 //Importing the model (database)
 const UserModel = require('../models/users');
 const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
+
+const users = [];
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
@@ -64,12 +65,7 @@ exports.registerUser = (req, res) => {
   //        a. Redirect user to login page with error message.
 
   // 3. If INVALID, redirect to register page with errors
-  const errors = validationResult(req);
-
-  if (errors.isEmpty()) {
-    const { email, firstName, lastName, username, mobile, password } = req.body;
-
-    userModel.getOne({ email: email }, (err, result) => {
+    /*userModel.getOne({ email: email }, (err, result) => {
       if (result) {
         console.log(result);
         // found a match, return to login with error
@@ -89,11 +85,11 @@ exports.registerUser = (req, res) => {
             password: hashed
           };
 
-          userModel.create(newUser, (err, user) => {
+          UserModel.create(newUser, (err, user) => {
           if (err) {
             req.flash('error_msg', 'Could not create user. Please try again.');
             res.redirect('/signup');
-            // res.status(500).send({ message: "Could not create user"});
+            res.status(500).send({ message: "Could not create user"});
           } else {
             console.log(user);
             req.flash('success_msg', 'You are now registered! Login below.');
@@ -103,14 +99,10 @@ exports.registerUser = (req, res) => {
       });
     }
   });  
-} else {
-  const messages = errors.array().map((item) => item.msg);
-
-  req.flash('error_msg', messages.join(' '));
-  res.redirect('/signup');
-  }
 };
-
+*/
+  
+/*
 exports.loginUser = (req, res) => {
   // 1. Validate request
 
@@ -181,4 +173,4 @@ exports.logoutUser = (req, res) => {
     });
   }
 };
-
+*/

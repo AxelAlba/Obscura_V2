@@ -13,7 +13,7 @@ const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
-const authRouter = require('./routes/auth.js');
+// const authRouter = require('./routes/auth.js');
 
 // create express app
 const port = 3000;
@@ -42,18 +42,15 @@ app.engine('hbs', hbs({ // HBS Config
 }));
 
 // Setup middlewares
+// Sessions
 app.use(session({
   secret: 'somegibberishsecret',
-  store: new MongoStore ({
-    host: '127.0.0.1',
-    port: '27017',
-    db: 'session',
-    url: 'mongodb://localhost:27017/demo'
-}),
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 }
 }));
+
 app.use(flash());
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
@@ -76,53 +73,10 @@ app.use('/signup', signupRouter);
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
-app.use('/', authRouter); // Login/registration routes
+// app.use('/', authRouter); // Login/registration routes
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
-
-// Insert server configuration after this comment
-// Sessions
-/*
-sessionStore = require("connect-mongoose-session-store")(express),
-app = express(),
-server = http.createServer(app),
-sessionStore = new sessionStore({
-  host: 'localhost',
-  port: 27017,
-  db: 'mydb',
-  stringify: false,
-  maxAge: 60 * 60 * 1000,
-  autoRemoveExpiredSession: true
-});
-*/
-/*
-sessionStore = require("connect-mongoose-session-store")(express),
-app = express(),
-server = http.createServer(app),
-sessionStore = new sessionStore({
-    host: 'localhost',
-    port: 27017,
-    db: 'mydb',
-    stringify: false,
-    maxAge: 60 * 60 * 1000,
-    autoRemoveExpiredSession: true,
-    sessionSchema: 'any_mongoose_schema',        // optional
-    sessionHistorySchema: 'any_mongoose_schema'  // optional
-});
-app.use(express.session({
-    secret: 'mlpi',
-    key: 'mlpi.sid',
-    cookie: {
-      path: '/',
-      domain: '',
-      httpOnly: true,
-      maxAge: 60 * 60 * 1000
-    },
-    store: sessionStore
-}));
-*/
-// Flash
 
 
 // Global messages vars
@@ -130,4 +84,28 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   next();
+});
+
+const users = [];
+
+
+
+app.post('/signup', async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    users.push({
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      mobile: req.body.mobile,
+      password: hashedPassword
+    })
+    res.redirect('/login');
+  } catch {
+    req.flash('error_msg', 'Could not create user. Please try again.');
+    res.redirect('/signup');
+    res.status(500).send({ message: "Could not create user"});
+  }
+  console.log(users);
 });
