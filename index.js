@@ -9,11 +9,11 @@ const MongoStore = require('connect-mongo')(session);
 const apiRouter = require('./routes/api-routes.js');
 const indexRouter = require('./routes/index.js');
 const loginRouter = require('./routes/login.js');
+const logoutRouter = require('./routes/logout.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
-// const authRouter = require('./routes/auth.js');
 
 // create express app
 const port = 3000;
@@ -73,7 +73,7 @@ app.use('/signup', signupRouter);
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
-// app.use('/', authRouter); // Login/registration routes
+app.use('/logout', logoutRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
@@ -84,28 +84,4 @@ app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   next();
-});
-
-const users = [];
-
-
-
-app.post('/signup', async (req, res) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    users.push({
-      email: req.body.email,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      username: req.body.username,
-      mobile: req.body.mobile,
-      password: hashedPassword
-    })
-    res.redirect('/login');
-  } catch {
-    req.flash('error_msg', 'Could not create user. Please try again.');
-    res.redirect('/signup');
-    res.status(500).send({ message: "Could not create user"});
-  }
-  console.log(users);
 });

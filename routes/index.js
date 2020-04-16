@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const { isPublic } = require('../middlewares/checkAuth');
 
-router.get('/', function(req, res) {
+router.get('/', isPublic, function(req, res) {
   res.render('landing');
 });
 
