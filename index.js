@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
-const indexRouter = require('./routes/index.js');
+const indexRouter = require('./routes/landing.js');
 const loginRouter = require('./routes/login.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
@@ -42,31 +42,30 @@ app.engine('hbs', hbs({ // HBS Config
 // Setup middlewares
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
-app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false})); //for sessions
-
+app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false})); 
 app.use(express.static('public')); // serve static files 
 
 //setup mongoDB database URL and options
 const mongoose = require('mongoose');
 const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
-
-const options = { useNewUrlParser: true,
+const options = { 
+  useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false };
+  useFindAndModify: false 
+};
 
 mongoose.connect(databaseURL, options);
 
 // Make the following routes available
-    //this block should be in the indexRouter (public)
 app.use('/', indexRouter);
 app.use('/login', loginRouter);     
 app.use('/signup', signupRouter);  
-
-    //this block should  be in the homeRouter (private) (should have /home first for the logged-in user)
-app.use('/api', apiRouter); 
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
+
+// API endpoints
+app.use('/api', apiRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));

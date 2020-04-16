@@ -1,9 +1,6 @@
 const router = require('express').Router();
- 
-router.get('/:pid', function (req, res) {
-  res.render('post', {
-    pid: req.params.pid  
-  });
-});
+const postsController = require('../controllers/postsController');
+
+router.get('/:pid', postsController.getPost);  // get single post
 
 module.exports = router;
