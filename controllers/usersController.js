@@ -63,7 +63,7 @@ exports.registerUser = (req, res) => {
   //        a. Redirect user to login page with error message.
 
   // 3. If INVALID, redirect to register page with errors
-    UserModel.getOne({ email: req.body.email }, (err, result) => {
+    UserModel.getOne({ $or: [ {email: req.body.email}, { username: req.body.username} ]}, (err, result) => {
       if (result) {
         console.log(result);
         // found a match, return to login with error
@@ -112,7 +112,7 @@ exports.loginUser = (req, res) => {
   //        a. Redirect to login page with error message
 
   // 3. If INVALID, redirect to login page with errors
-    UserModel.getOne({ email: req.body.email }, (err, user) => {
+    UserModel.getOne({ $or: [ {email: req.body.userinput}, { username: req.body.userinput} ]}, (err, user) => {
       if (err) {
         // Database error occurred...
         req.flash('error_msg', 'Something happened! Please try again.');
@@ -141,7 +141,7 @@ exports.loginUser = (req, res) => {
         });  
         } else {
           // No user found
-          req.flash('error_msg', 'No registered user with that email. Please register.');
+          req.flash('error_msg', 'No registered user with that email / username. Please register.');
           res.redirect('/signup');
         }
       }
