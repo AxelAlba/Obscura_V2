@@ -42,6 +42,16 @@ app.engine('hbs', hbs({ // HBS Config
 }));
 
 // Setup middlewares
+
+//setup mongoDB database URL and options
+const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
+
+const options = { useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false };
+
+mongoose.connect(databaseURL, options);
+module.exports = mongoose;
 // Sessions
 app.use(session({
   secret: 'somegibberishsecret',
@@ -56,15 +66,6 @@ app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('public')); // serve static files 
 
-//setup mongoDB database URL and options
-const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
-
-const options = { useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false };
-
-mongoose.connect(databaseURL, options);
-module.exports = mongoose;
 // Make the following routes available
 app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);
