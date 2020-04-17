@@ -56,6 +56,14 @@ app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('public')); // serve static files 
 
+// Global messages vars
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.isAuthenticated = req.session.user ? true : false;
+  next();
+});
+
 //setup mongoDB database URL and options
 const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
 
@@ -77,11 +85,3 @@ app.use('/logout', logoutRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
-
-
-// Global messages vars
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  next();
-});

@@ -151,7 +151,6 @@ exports.loginUser = (req, res) => {
 exports.logoutUser = (req, res) => {
   if (req.session) {
     req.session.destroy(() => {
-//      req.flash('error_msg', 'Error');
       res.clearCookie('connect.sid');
       res.redirect('/');
     });
