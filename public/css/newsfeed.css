@@ -1,6 +1,6 @@
 .gallery {
     padding: 1em;
-    column-count: 2;
+    column-count: 3;
 }
 
 img {
@@ -10,7 +10,7 @@ img {
 
 @media (max-width: 800px) {
     .gallery {
-        column-count: 1;
+        column-count: 2;
     }
 }
 

@@ -26,7 +26,6 @@ $(document).ready(() => {
       //followers array
       //followings array
     };  
-    
     $.ajax({
       url: '/api/updateProfile/' + $('#id').val(),
       method: 'PUT',

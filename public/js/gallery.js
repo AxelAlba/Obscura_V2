@@ -5,7 +5,7 @@
 
 $(document).ready(() => {
   $.ajax({
-    url: '/api/getPosts',
+    url: '/api/getDiscoverPosts',
     method: 'GET',
     success: (data, status) => {
       var gallery = $('.gallery'); 
@@ -15,13 +15,15 @@ $(document).ready(() => {
       });
       // set fancybox instance options
       $('[data-fancybox]').fancybox({
-        toolbar: false,
-        smallBtn: true,
+        toolbar: true,
+        smallBtn: false,
+        buttons: ["close"],
         infobar: false,
         iframe: {
           preload: false
         },
-        arrows: false
+        arrows: false,
+        touch: false
       })
     },
     error: () => {
@@ -39,11 +41,11 @@ function addToGallery(item, parentDiv) {
   var link = document.createElement('a');
   var img = document.createElement('img');
   // adding attributes
-  $(link).attr('data-fancybox', 'gallery');
-  $(link).attr('data-type', 'iframe');
-  $(link).attr('data-src', `/post/${item.pid}`); //Dan, please implement post.hbs
+  $(img).attr('src', item.img);
+  $(link).attr('data-fancybox', '');    
+  $(link).attr('data-type', 'ajax');
+  $(link).attr('data-src', `/post/${item._id}`);
   $(link).attr('href', 'javascript:;');
-  $(img).attr('src', item.image);
   // appending
   $(link).append(img);
   $(linkDiv).append(link);

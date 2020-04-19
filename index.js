@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
-const indexRouter = require('./routes/index.js');
+const indexRouter = require('./routes/landing.js');
 const loginRouter = require('./routes/login.js');
 const logoutRouter = require('./routes/logout.js');
 const signupRouter = require('./routes/signup.js');
@@ -41,17 +41,18 @@ app.engine('hbs', hbs({ // HBS Config
 }
 }));
 
-// Setup middlewares
-
 //setup mongoDB database URL and options
-const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
 
-const options = { useNewUrlParser: true,
+const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
+const options = { 
+  useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false };
+  useFindAndModify: false 
+};
 
 mongoose.connect(databaseURL, options);
 module.exports = mongoose;
+
 // Sessions
 app.use(session({
   secret: 'somegibberishsecret',
@@ -61,10 +62,11 @@ app.use(session({
   cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 }
 }));
 
-app.use(flash());
+// Setup middlewares
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('public')); // serve static files 
+app.use(flash());
 
 // Global messages vars
 app.use((req, res, next) => {
@@ -75,14 +77,16 @@ app.use((req, res, next) => {
 });
 
 // Make the following routes available
-app.use('/api', apiRouter); // make API available
 app.use('/', indexRouter);
-app.use('/login', loginRouter);     
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);     
 app.use('/signup', signupRouter);  
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
-app.use('/logout', logoutRouter);
+
+// API endpoints
+app.use('/api', apiRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));

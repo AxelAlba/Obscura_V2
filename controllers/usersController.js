@@ -1,12 +1,9 @@
-// import json model (temporary)
-var Users = require('../models/users.json');
 //Importing the model (database)
-const UserModel = require('../models/users');
-const bcrypt = require('bcrypt');
+const UserModel = require('../models/UserModel');
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUser(email, function (user) {
+  UserModel.getUserByEmail(email, function (user) { //should use getUserByID if the logged in user is already implemented
     console.log('logged in user profile: ' + user);
     res.render('profile', {
       logUser: user
@@ -16,7 +13,7 @@ exports.getProfile = function (req, res) {
 
 exports.settings = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUser(email, function (user) {
+  UserModel.getUserByEmail(email, function (user) { //same with getProfile
     console.log('logged in user edit profile: ' + user);
     res.render('editProfile', {
       logUser: user
@@ -47,10 +44,25 @@ exports.update = function(req, res) {
   });
 }
 
+exports.search = function (req, res) {
+  var search = req.query.search;
+  UserModel.searchUser(search, { username: 1 }, function(userObjects) {
+    res.render('search', {
+      users: userObjects 
+    });
+  })
+}
+
+exports.getUser = function (req, res) {
+  var id = req.params.uid;
+  UserModel.getUserById(id, function(user) {
+    res.render('otherProfile', {
+      user: user
+    })
+  });
+}
+
 // LOG-IN AND REGISTRATION AUTHENTICATION PART
-
-
-
 exports.registerUser = (req, res) => {
   // 1. Validate request
 
@@ -112,7 +124,7 @@ exports.loginUser = (req, res) => {
   //        a. Redirect to login page with error message
 
   // 3. If INVALID, redirect to login page with errors
-    UserModel.getOne({ $or: [ {email: req.body.userinput}, { username: req.body.userinput} ]}, (err, user) => {
+    UserModel.getOne({ $or: [ {email: req.body.userinput}, { username: req.body.userinput} ] }, (err, user) => {
       if (err) {
         // Database error occurred...
         req.flash('error_msg', 'Something happened! Please try again.');

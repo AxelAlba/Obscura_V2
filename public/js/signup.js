@@ -6,7 +6,7 @@ function checkPassword(field1, field2, val)
         valid = false;
         field1.css('border-color', 'red');
         field2.css('border-color', 'red');  
-        $("#warning").text("Password does not match.");   
+        $("#warning").text("Password does not match.");   // removed 
     } else {
         field1.css('border-color', 'white');
         field2.css('border-color', 'white');

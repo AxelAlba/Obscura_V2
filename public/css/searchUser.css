@@ -1,0 +1,50 @@
+body{
+	background-color: #CABCB0;
+}
+.main-section{
+	padding:15px;
+	font-family: 'Barlow Condensed', sans-serif;
+}
+.section{
+	border-radius:5px;
+	background-color: #fff;
+}
+.section .fa{
+	font-size:17px;
+	margin-right: 5px;
+}
+.section:hover,.section:hover.section img{
+	box-shadow:1px 2px 24px 0px #000;
+	transition:0.5s;
+}
+.section h1{
+	margin:0px;
+	font-size:25px;
+	color:#8B95A5;
+}
+.section p{
+	margin:0px;
+	font-weight:500;
+	margin-bottom:40px;
+	letter-spacing: 1px;
+}
+.section img{
+	width:20%;
+	height:20%;
+	border-radius: 50%;
+	margin:20px 0px 10px 0px;
+}
+.user-detail{
+	background-color:#FCFDDB;
+	border-top:1px solid #d2d2d2;
+	padding: 5px 0px;
+	border-radius:0px 0px 5px 5px;
+}
+.user-detail h2{
+	font-size: 20px;
+	color:#a2a2a2;
+	font-weight:400;
+}
+  
+  
+  

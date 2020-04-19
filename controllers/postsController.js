@@ -1,16 +1,24 @@
-// import json model (temporary)
-Posts = require('../models/posts.json');
-
 //Importing the model (database)
-const postModel = require('../models/posts');
+const PostModel = require('../models/PostModel');
 
 // route handlers (CRUD)
-exports.viewPost = function(req, res) {
-  let post = Posts.filter(post => post.pid == req.params.pid)[0];
-  console.log(post);
-  res.send(post);
+// returns post view
+exports.getPost = function(req, res) {
+  PostModel.getPostById(req.params.pid, function(post) {
+    res.render('post', {post: post});
+  });
 }
 
-exports.getPosts = function (req, res) {
-  res.send(Posts);
+// returns all posts
+exports.getDiscoverPosts = function (req, res) {
+  PostModel.getDiscoverPosts(function(posts) {
+    res.send(posts);
+  })
+}
+
+// creates comment
+exports.createComment = function (req, res) {
+  PostModel.createComment(req.params.pid, req.body.commenter, req.body.comment, function (comment) {
+    res.send(comment);
+  });
 }
