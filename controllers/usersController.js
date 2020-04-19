@@ -1,5 +1,6 @@
 //Importing the model (database)
 const UserModel = require('../models/UserModel');
+const bcrypt = require('bcrypt');
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.

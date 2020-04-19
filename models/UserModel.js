@@ -69,3 +69,12 @@ exports.getOne = function(query, next) {
     next(err, user);
   });
 };
+
+// Saving a user given the validated object
+exports.create = function(obj, next) {
+  const user = new UserModel(obj);
+
+  user.save(function(err, user) {
+    next(err, user);
+  });
+};
