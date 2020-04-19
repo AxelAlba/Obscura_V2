@@ -1,10 +1,11 @@
 //Importing the model (database)
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
 exports.getProfile = function (req, res) {
-  var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUserByEmail(email, function (user) { //should use getUserByID if the logged in user is already implemented
+  //var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
+  UserModel.getUserById(req.session.user, function (user) { //should use getUserByID if the logged in user is already implemented
     console.log('logged in user profile: ' + user);
     res.render('profile', {
       logUser: user
@@ -13,8 +14,8 @@ exports.getProfile = function (req, res) {
 }
 
 exports.settings = function (req, res) {
-  var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
-  UserModel.getUserByEmail(email, function (user) { //same with getProfile
+  //var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
+  UserModel.getUserById(req.session.user, function (user) { //same with getProfile
     console.log('logged in user edit profile: ' + user);
     res.render('editProfile', {
       logUser: user
@@ -23,7 +24,7 @@ exports.settings = function (req, res) {
 }
 
 exports.update = function(req, res) {
-    var id = req.params.id;
+   // var id = req.params.id;
     var update = {
       //uid 
       email: req.body.email,
@@ -40,7 +41,7 @@ exports.update = function(req, res) {
       //followings array
   };
 
-  UserModel.updateUser(id, update, function(user) {
+  UserModel.updateUser(req.session.user, update, function(user) {
     console.log('update successful for user: ' + user);
   });
 }
@@ -55,8 +56,8 @@ exports.search = function (req, res) {
 }
 
 exports.getUser = function (req, res) {
-  var id = req.params.uid;
-  UserModel.getUserById(id, function(user) {
+  var id = req.params.id.toString();
+  UserModel.getUserById(mongoose.Types.ObjectId(id), function(user) {
     res.render('otherProfile', {
       user: user
     })
@@ -65,17 +66,6 @@ exports.getUser = function (req, res) {
 
 // LOG-IN AND REGISTRATION AUTHENTICATION PART
 exports.registerUser = (req, res) => {
-  // 1. Validate request
-
-  // 2. If VALID, find if email exists in users
-  //      NEW USER (no results retrieved)
-  //        a. Hash password
-  //        b. Create user
-  //        c. Redirect to login page
-  //      EXISTING USER (match retrieved)
-  //        a. Redirect user to login page with error message.
-
-  // 3. If INVALID, redirect to register page with errors
     UserModel.getOne({ $or: [ {email: req.body.email}, { username: req.body.username} ]}, (err, result) => {
       if (result) {
         console.log(result);
@@ -114,17 +104,6 @@ exports.registerUser = (req, res) => {
   
 
 exports.loginUser = (req, res) => {
-  // 1. Validate request
-
-  // 2. If VALID, find if email exists in users
-  //      EXISTING USER (match retrieved)
-  //        a. Check if password matches hashed password in database
-  //        b. If MATCH, save info to session and redirect to home
-  //        c. If NOT equal, redirect to login page with error
-  //      UNREGISTERED USER (no results retrieved)
-  //        a. Redirect to login page with error message
-
-  // 3. If INVALID, redirect to login page with errors
     UserModel.getOne({ $or: [ {email: req.body.userinput}, { username: req.body.userinput} ] }, (err, user) => {
       if (err) {
         // Database error occurred...
