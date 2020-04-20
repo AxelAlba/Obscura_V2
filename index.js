@@ -15,9 +15,6 @@ const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
 
-//security and authentication
-const session = require('express-session');
-
 // create express app
 const port = 3000;
 const app = express();
