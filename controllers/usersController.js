@@ -1,6 +1,7 @@
 //Importing the model (database)
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
 
 exports.getProfile = function (req, res) {
   var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
@@ -76,6 +77,11 @@ exports.registerUser = (req, res) => {
   //        a. Redirect user to login page with error message.
 
   // 3. If INVALID, redirect to register page with errors
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) {
+    const { password } = req.body;
+
     UserModel.getOne({ $or: [ {email: req.body.email}, { username: req.body.username} ]}, (err, result) => {
       if (result) {
         console.log(result);
@@ -86,7 +92,7 @@ exports.registerUser = (req, res) => {
         const saltRounds = 10;
 
         // Hash password
-        bcrypt.hash(req.body.password, saltRounds, (err, hashed) => {
+        bcrypt.hash(password, saltRounds, (err, hashed) => {
           const newUser = {
             email: req.body.email,
             firstName: req.body.firstName,
@@ -110,6 +116,12 @@ exports.registerUser = (req, res) => {
       });
     }
   });  
+} else {
+  const messages = errors.array().map((item) => item.msg);
+
+  req.flash('error_msg', messages.join(' '));
+  res.redirect('/signup');
+  }
 };
   
 
@@ -125,7 +137,16 @@ exports.loginUser = (req, res) => {
   //        a. Redirect to login page with error message
 
   // 3. If INVALID, redirect to login page with errors
-    UserModel.getOne({ $or: [ {email: req.body.userinput}, { username: req.body.userinput} ] }, (err, user) => {
+
+  const errors = validationResult(req);
+
+  if (errors.isEmpty()) {
+    const {
+      userinput,
+      password
+    } = req.body;
+
+    UserModel.getOne({ $or: [ {email: userinput}, { username: userinput} ] }, (err, user) => {
       if (err) {
         // Database error occurred...
         req.flash('error_msg', 'Something happened! Please try again.');
@@ -136,7 +157,7 @@ exports.loginUser = (req, res) => {
           // User found!
     
         // Check password with hashed value in the database
-        bcrypt.compare(req.body.password, user.password, (err, result) => {
+        bcrypt.compare(password, user.password, (err, result) => {
           // passwords match (result == true)
           if (result) {
             // Update session object once matched!
@@ -159,7 +180,13 @@ exports.loginUser = (req, res) => {
         }
       }
     });
+  } else {
+    const messages = errors.array().map((item) => item.msg);
+  
+    req.flash('error_msg', messages.join(' '));
+    res.redirect('/login');
   }
+};
 
 exports.logoutUser = (req, res) => {
   if (req.session) {
