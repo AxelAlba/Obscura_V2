@@ -1,7 +1,10 @@
 const router = require('express').Router();
 
-router.get('/', function(req, res) {
+const { isPublic } = require('../middlewares/checkAuth');
+
+router.get('/', isPublic, function(req, res) {
   res.render('landing');
 });
 
 module.exports = router;
+

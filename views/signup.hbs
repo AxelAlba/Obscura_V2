@@ -7,39 +7,78 @@
 <script type="text/javascript" src="js/signup.js"></script>
 <!-- Sign up page -->
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <h5 class="card-title text-center">Sign Up to Obscura</h5>
-            <form class="form-signin" action="/">
-              <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" required>
-                <label for="inputEmail">Email address</label>
-              </div>
-              <div class="form-label-group">
-                <input type="text" id="inputUsername" class="form-control" placeholder="Username" required>
-                <label for="inputUsername">Username</label>
-              </div>
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <label for="inputPassword">Password</label>
-              </div>
-              <div class="form-label-group">
-                <input type="password" id="retypePassword" class="form-control" placeholder="Password" required>
-                <label for="retypePassword">Re-enter Password</label>
-              </div>
-              <div class="custom-control custom-checkbox mb-3">
-                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
-                <label class="custom-control-label" for="customCheck1">I Agree to the Terms and Conditions</label>
-              </div>
-              <p id="warning"></p>
-              <hr class="my-4">
-              <button class="btn btn-lg btn-login btn-block text-uppercase" input type="submit" onclick="checkEqual"
-                id="submit"><i class="fab fa-login mr-2"></i>Register</button>
-            </form>
-          </div>
+      <header id="header">
+    
+    <div class="container-fluid">
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <h1 class="text-light"><a href="/">Obscura</a></h1>
+      </div>
+
+      <nav class="main-nav float-right d-lg-block">
+        <ul>
+          <li><a href="/login">Log In</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+  </header><!-- #header -->
+      <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div class="card card-signin my-5">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Sign Up to Obscura</h5>
+                  {{> messages}}
+                  <form class="form-signin" action = "/signup" method = "POST">
+                    <div class="form-label-group">
+                      <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email Address" required>
+                      <label for="inputEmail">Email address</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="inputFirstName" name="firstName" class="form-control" placeholder="First Name" required>
+                        <label for="inputFirstName">First Name</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="inputLastName" name="lastName" class="form-control" placeholder="Last Name" required>
+                        <label for="inputLastName">Last Name</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required>
+                        <label for="inputUsername">Username</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="text" id="inputMobileNum" name="mobile" class="form-control" placeholder="Number" required>
+                        <label for="inputMobileNum">Mobile No.</label>
+                    </div>
+                    
+                    <div class="form-label-group">
+                      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+                      <label for="inputPassword">Password</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="retypePassword" name="confirmPass" class="form-control" placeholder="Password" required>
+                        <label for="retypePassword">Re-enter Password</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox mb-3">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                      <label class="custom-control-label" for="customCheck1">I Agree to the Terms and Conditions</label>
+                    </div>
+
+                    <p class = "blockquote-footer" id = "warning"></p>
+                    <hr class="my-4">
+                    <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" onclick = "checkEqual" id = "submit"><i class="fab fa-login mr-2"></i>Register</button>
+                  </form>
+                  <script type = "text/javascript" src = "js/signup.js"></script>
+                </div>
         </div>
       </div>
     </div>

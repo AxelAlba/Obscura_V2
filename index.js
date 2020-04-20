@@ -1,17 +1,19 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
 const indexRouter = require('./routes/landing.js');
 const loginRouter = require('./routes/login.js');
+const logoutRouter = require('./routes/logout.js');
 const signupRouter = require('./routes/signup.js');
 const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
-
-//security and authentication
-const session = require('express-session');
 
 // create express app
 const port = 3000;
@@ -39,14 +41,8 @@ app.engine('hbs', hbs({ // HBS Config
 }
 }));
 
-// Setup middlewares
-app.use(express.json()); // support json encoded bodies
-app.use(express.urlencoded({ extended: true })); // support encoded bodies
-app.use(session({secret: 'mySecret', resave: false, saveUninitialized: false})); 
-app.use(express.static('public')); // serve static files 
 
 //setup mongoDB database URL and options
-const mongoose = require('mongoose');
 const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
 const options = { 
   useNewUrlParser: true,
@@ -55,10 +51,35 @@ const options = {
 };
 
 mongoose.connect(databaseURL, options);
+module.exports = mongoose;
+
+// Sessions
+app.use(session({
+  secret: 'somegibberishsecret',
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 1000 * 60 * 60 * 24 * 7 }
+}));
+
+// Setup middlewares
+app.use(express.json()); // support json encoded bodies
+app.use(express.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.static('public')); // serve static files 
+app.use(flash());
+
+// Global messages vars
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.isAuthenticated = req.session.user ? true : false;
+  next();
+});
 
 // Make the following routes available
 app.use('/', indexRouter);
-app.use('/login', loginRouter);     
+app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);     
 app.use('/signup', signupRouter);  
 app.use('/newsfeed', newsfeedRouter);   
 app.use('/post', postRouter);   
@@ -69,5 +90,3 @@ app.use('/api', apiRouter);
 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));
-
-

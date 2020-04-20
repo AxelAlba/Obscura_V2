@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new mongoose.Schema(
   {
     email: {type: String, required: [true, "No email provided"]},
-    password: {type: String, required: [true, "No password provided"]},
+    password: {type: String, min: 6, required: [true, "No password provided"]},
     username: {type: String, required: [true, "No userName provided"]},
     firstName: {type: String, required: [true, "No firstName provided"]},
     lastName: {type: String, required: [true, "No lastName provided"]},
@@ -28,8 +28,8 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model('users', UserSchema);
 
-exports.getUserByEmail = function (email, next) {
-  UserModel.find({email: email}, (err, result) => {
+exports.getUserByEmail = function (query, next) {
+  UserModel.find({query: query}, (err, result) => {
     if (err) throw err;
     result.forEach((doc) => {
         next(doc.toObject());
@@ -62,3 +62,20 @@ exports.getUserById = function (id, next) {
     next(user.toObject());
   });
 }
+
+// Retrieving just ONE user based on a query (first one)
+exports.getOne = function(query, next) {
+  UserModel.findOne(query, function(err, user) {
+    next(err, user);
+  });
+};
+
+// Saving a user given the validated object
+exports.create = function(obj, next) {
+  const user = new UserModel(obj);
+
+  user.save(function(err, user) {
+    next(err, user);
+  });
+};
+

@@ -1,25 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <!--<link rel="stylesheet" href="Landing Page Design.css"> -->
-    <link href="css/LoginPage.css" rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-        <div class="card-body">
-          <h5 class="card-title text-center">Log In to Obscura</h5>
-          <form class="form-signin" action="/newsfeed">
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" value="axel@email.com">
-            <label for="inputEmail">Email address / Username</label>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <!--<link rel="stylesheet" href="Landing Page Design.css"> -->
+        <link href="css/LoginPage.css" rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
+    </head>
+    <body>
+      <header id="header">
+    
+    <div class="container-fluid">
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <h1 class="text-light"><a href="/">Obscura</a></h1>
+      </div>
+
+      <nav class="main-nav float-right d-lg-block">
+        <ul>
+          <li><a href="/login">Log In</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+      <div class="container">
+          <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+              <div class="card card-signin my-5">
+                <div class="card-body">
+                  <h5 class="card-title text-center">Log In to Obscura</h5>
+                  {{> messages}}
+                  <form class="form-signin" action="/login" method = "POST">
+                    <div class="form-label-group">
+                      <input type="text" id="inputEmailUser" name="userinput" class="form-control" placeholder="Username">
+                      <label for="inputEmailUser">Email address / Username</label>
+                    </div>
+      
+                    <div class="form-label-group">
+                      <input type="password" id="inputPassword" name ="password" class="form-control" placeholder="Password">
+                      <label for="inputPassword">Password</label>
+                    </div>
+      
+                    <div class="custom-control custom-checkbox mb-3">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1">
+                      <label class="custom-control-label" for="customCheck1">Remember password</label>
+                    </div>
+                    <hr class="my-4">
+                    <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit"><i class="fab fa-login mr-2"></i>Log In</button>
+                    <p id = "createAccount">Don't have an account yet?</p>
+                    <a href ="/signup" class="btn btn-lg btn-createAccount btn-block text-uppercase" ><i class="fab fa-createAccount-f mr-2"></i>Create an Account</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+
           </div>
     
           <div class="form-label-group">
