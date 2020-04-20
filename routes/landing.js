@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const { isPublic } = require('../middlewares/checkAuth');
 
 router.get('/', isPublic, function(req, res) {
@@ -6,3 +7,4 @@ router.get('/', isPublic, function(req, res) {
 });
 
 module.exports = router;
+

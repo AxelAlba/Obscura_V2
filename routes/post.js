@@ -4,4 +4,5 @@ const { isPrivate } = require('../middlewares/checkAuth');
 
 router.get('/:pid', isPrivate, postsController.getPost);  // get single post
 
+
 module.exports = router;

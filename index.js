@@ -15,6 +15,9 @@ const newsfeedRouter = require('./routes/newsfeed.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
 
+//security and authentication
+const session = require('express-session');
+
 // create express app
 const port = 3000;
 const app = express();
@@ -41,8 +44,8 @@ app.engine('hbs', hbs({ // HBS Config
 }
 }));
 
-//setup mongoDB database URL and options
 
+//setup mongoDB database URL and options
 const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
 const options = { 
   useNewUrlParser: true,
