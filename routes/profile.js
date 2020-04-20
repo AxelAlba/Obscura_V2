@@ -5,5 +5,4 @@ const { isPrivate } = require('../middlewares/checkAuth');
 router.get('/', isPrivate, userController.getProfile); // read profile
 router.get('/settings', isPrivate, userController.settings); // settings page
 router.get('/others/:id', isPrivate, userController.getUser) //other profiles
-
 module.exports = router;

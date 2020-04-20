@@ -6,12 +6,6 @@ const mongoose = require('mongoose');
 exports.getProfile = function (req, res) {
   //var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
   UserModel.getUserById(req.session.user, function (user) { //should use getUserByID if the logged in user is already implemented
-    console.log('logged in user profile: ' + user);
-    res.render('profile', {
-      logUser: user
-    });
-  });
-}
 
 exports.settings = function (req, res) {
   //var email = 'axel@email.com'; //this is only temporary as there is still no logged in user.
@@ -54,7 +48,6 @@ exports.search = function (req, res) {
     });
   })
 }
-
 exports.getUser = function (req, res) {
   var id = req.params.id.toString();
   UserModel.getUserById(mongoose.Types.ObjectId(id), function(user) {

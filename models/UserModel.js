@@ -28,8 +28,9 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model('users', UserSchema);
 
-exports.getUserByEmail = function (query, next) {
-  UserModel.find({query: query}, (err, result) => {
+
+exports.getUserByEmail = function (email, next) {
+  UserModel.find({email: email}, (err, result) => {
     if (err) throw err;
     result.forEach((doc) => {
         next(doc.toObject());
@@ -73,7 +74,6 @@ exports.getOne = function(query, next) {
 // Saving a user given the validated object
 exports.create = function(obj, next) {
   const user = new UserModel(obj);
-
   user.save(function(err, user) {
     next(err, user);
   });

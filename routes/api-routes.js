@@ -13,5 +13,4 @@ router.post('/post/:pid/comment/create', isPrivate, postsController.createCommen
 //for the users
 router.put('/updateProfile/:id', isPrivate, usersController.update); // update user profile
 router.get('/searchUser', isPrivate, usersController.search); // search users
-
 module.exports = router;
