@@ -28,15 +28,6 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model('users', UserSchema);
 
-exports.getUserByEmail = function (query, next) {
-  UserModel.find({query: query}, (err, result) => {
-    if (err) throw err;
-    result.forEach((doc) => {
-        next(doc.toObject());
-    });
-  });
-}
-
 exports.updateUser = function (id, update, next){
   UserModel.findByIdAndUpdate({_id: id}, update, function() {
     UserModel.findOne({_id: id}, function(user) {
@@ -78,4 +69,44 @@ exports.create = function(obj, next) {
     next(err, user);
   });
 };
+
+
+exports.updateFollowings = function (logUser, followId, next) {
+  UserModel.findByIdAndUpdate(logUser, {$push: {'followings': followId}}, {safe: true, upsert: true, new: true}, (err, model)  => {
+    next(err, model);
+  });
+};
+
+exports.updateFollowers = function (followId, logUser, next) {
+  UserModel.findByIdAndUpdate(followId, {$push: {'followers': logUser}}, {safe: true, upsert: true, new: true}, (err, model)  => {
+    next(err, model);
+  });
+};
+
+exports.popFollowings = function (logUser, followId, next) {
+  UserModel.findByIdAndUpdate(logUser, {$pull: {'followings': followId}}, {new: true}, (err, model)  => {
+    next(err, model);
+  });
+};
+
+exports.popFollowers = function (followId, logUser, next) {
+  UserModel.findByIdAndUpdate(followId, {$pull: {'followers': logUser}}, {new: true}, (err, model)  => {
+    next(err, model);
+  });
+};
+
+exports.getFollowings = function (id, next){
+  UserModel.findById(id).populate("followings").lean().exec(function(err, user){
+    if (err) throw err;
+    next(user.followings);
+  });
+};
+
+exports.getFollowers = function (id, next){
+  UserModel.findById(id).populate("followers").lean().exec(function(err, user){
+    if (err) throw err;
+    next(user.followers);
+  });
+};
+
 

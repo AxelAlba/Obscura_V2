@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const Handlebars = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
@@ -22,6 +24,7 @@ const app = express();
 // Setup handlebars
 app.set('view engine', 'hbs'); // Set template 
 app.engine('hbs', hbs({ // HBS Config
+  handlebars: allowInsecurePrototypeAccess(Handlebars),
   extname: 'hbs',
   defaultView: 'default',
   layoutsDir: __dirname + '/views/layouts/',
@@ -65,7 +68,6 @@ app.use(session({
 // Setup middlewares
 app.use(express.json()); // support json encoded bodies
 app.use(express.urlencoded({ extended: true })); // support encoded bodies
-app.use(express.static('public')); // serve static files 
 app.use(flash());
 
 // Global messages vars
@@ -88,5 +90,7 @@ app.use('/profile', profileRouter);
 // API endpoints
 app.use('/api', apiRouter);
 
+// serve static files 
+app.use(express.static('public')); 
 // listen on port
 app.listen(port, () => console.log(`Listening to ${port}`));

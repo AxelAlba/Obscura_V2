@@ -7,7 +7,7 @@
     <div class="col-lg-12 col-sm-12 col-12 main-section">
       <div class="row text-center mb-3">
       {{#each users as |user|}}
-      <a href = '/profile/others/{{user._id}}' class="col-lg-4 col-sm-4 col-12">
+      <a href = '/profile/{{user._id}}' class="col-lg-4 col-sm-4 col-12">
         <div class="row-fluid section">
           <div class="col-lg-12 col-sm-12 col-12">
             <img src='{{user.profilePic}}'>
@@ -32,5 +32,5 @@
     </div>
   </div>
   {{else}}
-  <h1 style = "color:white;" class = 'display-4'>No user with that username has been found.</h1>
+  <h1 style = "color:white;" class = 'text-center display-4'>No user found.</h1>
 {{/if}}

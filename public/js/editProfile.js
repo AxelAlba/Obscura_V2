@@ -27,7 +27,7 @@ $(document).ready(() => {
       //followings array
     };  
     $.ajax({
-      url: '/api/updateProfile/' + $('#id').val(),
+      url: '/api/updateProfile',
       method: 'PUT',
       data: profile, 
       success: (data, status) => { 
@@ -39,15 +39,3 @@ $(document).ready(() => {
     });
   })
 });
-
-// Helper functions
-/* //prioritize image url
-function PreviewImage() {
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("profilePic").files[0]);
-
-    oFReader.onload = function (oFREvent) {
-        document.getElementById("uploadPreview").src = oFREvent.target.result;
-    };
-};
-*/

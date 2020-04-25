@@ -5,12 +5,7 @@ const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
 
 exports.getProfile = function (req, res) {
-  UserModel.getUserById(req.session.user, function (user) { //should use getUserByID if the logged in user is already implemented
-    console.log('logged in user profile: ' + user);
-    res.render('profile', {
-      logUser: user
-    });
-  });
+  res.redirect(`/profile/${req.session.user}`);
 }
 
 exports.settings = function (req, res) {
@@ -54,12 +49,41 @@ exports.search = function (req, res) {
 }
 
 exports.getUser = function (req, res) {
-  var id = req.params.uid.toString();
-  UserModel.getUserById(mongoose.Types.ObjectId(id), function(user) {
-    res.render('otherProfile', {
-      user: user
+  var id = mongoose.Types.ObjectId(req.params.uid);
+  var isLogUser = false;
+  var isFollowed = false;
+
+  if (id.toString() == req.session.user.toString()){
+    isLogUser = true;
+    console.log('Is it the session user?'+ isLogUser);
+    UserModel.getUserById(id, function(user) {
+      res.render('profile', {
+        user: user,
+        isLogUser: isLogUser,
+        isFollowed: isFollowed
+      })
+    });
+  }
+  else 
+  {
+    var followings;
+    UserModel.getUserById(req.session.user, function (user) {
+      followings = user.followings;
+     // console.log(followings);
+      if (followings.some(following => following._id.toString() === id.toString()))
+        isFollowed = true;
+      else isFollowed = false;
+      console.log('is followed value: ' + isFollowed);
+      console.log('Is it the session user?'+ isLogUser);
+      UserModel.getUserById(id, function(user) {
+        res.render('profile', {
+          user: user,
+          isLogUser: isLogUser,
+          isFollowed: isFollowed
+        })
+      });
     })
-  });
+  }
 }
 
 // LOG-IN AND REGISTRATION AUTHENTICATION PART
@@ -169,4 +193,59 @@ exports.logoutUser = (req, res) => {
       res.redirect('/');
     });
   }
+};
+
+
+exports.follow = (req, res) => {
+  var followId = req.body.userId;
+
+    //This is for updating the followings of the logged-in user.
+    UserModel.updateFollowings(req.session.user, followId, (error, sessionUserModel) => {
+      console.log(error);
+      console.log('(follow)This is the new followings of the logged-in user: ' + sessionUserModel.followings);
+    });
+
+    //This is for updating the followers of the user being followed.
+    UserModel.updateFollowers(followId, req.session.user, (error, followedModel) => {
+      console.log(error);
+      console.log('(follow)This is the new followers of the user being followed: ' + followedModel.followers);
+      res.send(followedModel.followers);
+    });
+};
+
+exports.unfollow = (req, res) => {
+  var followId = req.body.userId;
+
+    //This is for popping an element in the followings of the logged-in user.
+    UserModel.popFollowings(req.session.user, followId, (error, sessionUserModel) => {
+      console.log(error);
+      console.log('(unfollow)This is the new followings of the logged-in user: ' + sessionUserModel.followings);
+    });
+
+    //This is for popping an element in the followers of the user being followed.
+    UserModel.popFollowers(followId, req.session.user, (error, followedModel) => {
+      console.log(error);
+      console.log('(unfollow)This is the new followers of the user being followed: ' + followedModel.followers);
+      res.send(followedModel.followers);
+    });
+};
+
+exports.followers = (req, res) => {
+  id = req.params.uid;
+  UserModel.getFollowers(id, function(followers){
+    console.log('for follower link: '+ followers);
+    res.render('search', {
+      users:  followers
+    });
+  });
+};
+
+exports.followings = (req, res) => {
+  id = req.params.uid;
+  UserModel.getFollowings(id, function(followings){
+    console.log('for following link: '+ followings);
+    res.render('search', {
+      users:  followings
+    });
+  });
 };
