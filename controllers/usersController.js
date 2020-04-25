@@ -5,14 +5,6 @@ const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
 
 exports.getProfile = function (req, res) {
-  /*
-  UserModel.getUserById(req.session.user, function (user) { //should use getUserByID if the logged in user is already implemented
-    console.log('logged in user profile: ' + user);
-    res.render('profile', {
-      logUser: user
-    });
-  });
-  */
   res.redirect(`/profile/${req.session.user}`);
 }
 

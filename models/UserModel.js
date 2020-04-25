@@ -28,15 +28,6 @@ const UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model('users', UserSchema);
 
-exports.getUserByEmail = function (query, next) {
-  UserModel.find({query: query}, (err, result) => {
-    if (err) throw err;
-    result.forEach((doc) => {
-        next(doc.toObject());
-    });
-  });
-}
-
 exports.updateUser = function (id, update, next){
   UserModel.findByIdAndUpdate({_id: id}, update, function() {
     UserModel.findOne({_id: id}, function(user) {
