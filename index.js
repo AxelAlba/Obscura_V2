@@ -6,6 +6,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const Handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+
 
 // import routes
 const apiRouter = require('./routes/api-routes.js');
