@@ -32,6 +32,37 @@ exports.getDiscoverPosts = function (next) {
     });
 };
 
+//Get following posts
+exports.getFollowingPosts = function (id, next) {
+  PostModel.find( {author : id}, 'img') // Add filter for not followed
+    .exec((err, data) => {
+      if (err) throw err;
+
+      var posts = [];
+      data.forEach((post) => {
+        posts.push(post.toObject());
+      });
+
+      next(posts);
+    });
+};
+
+//Get current profile's posts
+exports.getProfilePosts = function (id, next) {
+  PostModel.find( {author : id}, 'img') // Add filter for not followed
+    .exec((err, data) => {
+      if (err) throw err;
+
+      var posts = [];
+      data.forEach((post) => {
+        posts.push(post.toObject());
+      });
+
+      next(posts);
+    });
+};
+
+
 exports.getPostById = function (id, next) {
   PostModel.findById(id)
     .populate('author')

@@ -4,9 +4,23 @@
 */ 
 
 $(document).ready(() => {
+  var feedmode = $('#mode').val(); // get mode of the newsfeed
+  var finalUrl;
+    if (feedmode === "discover")
+      finalUrl = 'getDiscoverPosts';
+    else if (feedmode === "following")
+      finalUrl = 'getFollowingPosts';
+    else
+      finalUrl = 'getProfilePosts';
+
+    var url = document.URL;
+    var userId = url.substring(url.lastIndexOf('/') + 1);
+    console.log(userId);
+    console.log(finalUrl);
   $.ajax({
-    url: '/api/getDiscoverPosts',
+    url: '/api/' + finalUrl,
     method: 'GET',
+    data: {user: userId},
     success: (data, status) => {
       var gallery = $('.gallery'); 
       // append images to gallery    

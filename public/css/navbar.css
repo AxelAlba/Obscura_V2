@@ -1,6 +1,6 @@
 .navbar {
   padding: 0;
-  height: 9vh;
+  height: 15vh;
 }
 
 .gallery {
@@ -9,6 +9,7 @@
   
 .searchBar {
   width: 600px;
+  margin-left: 2em;
 }
 
 .searchBar input{

@@ -13,7 +13,8 @@ const indexRouter = require('./routes/landing.js');
 const loginRouter = require('./routes/login.js');
 const logoutRouter = require('./routes/logout.js');
 const signupRouter = require('./routes/signup.js');
-const newsfeedRouter = require('./routes/newsfeed.js');
+const discoverRouter = require('./routes/discover.js');
+const followingRouter = require('./routes/following.js');
 const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
 
@@ -83,7 +84,8 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);     
 app.use('/signup', signupRouter);  
-app.use('/newsfeed', newsfeedRouter);   
+app.use('/following', followingRouter);
+app.use('/discover', discoverRouter);   
 app.use('/post', postRouter);   
 app.use('/profile', profileRouter);
 
