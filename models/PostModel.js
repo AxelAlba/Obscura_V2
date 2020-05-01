@@ -63,3 +63,20 @@ exports.createComment = function (id, commenter, comment, next) {
         next(commentDetails);
       });
 };
+
+exports.createPost = function (postObj, next) {
+  const post = new PostModel(postObj);
+
+  post.save(function (err, post) {
+    if (err) throw err;
+    
+    next(post);
+  });
+};
+
+exports.deletePost = function (postID, next) {
+  PostModel.deleteOne({_id: postID}, function(err) {
+    if (err) throw err;
+    next("Delete successful");
+  })
+}

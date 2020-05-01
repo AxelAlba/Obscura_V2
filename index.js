@@ -6,11 +6,8 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const Handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
-const path = require('path');
-const crypto = require('crypto');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
+
+
 
 
 // import routes
@@ -36,7 +33,7 @@ app.engine('hbs', hbs({ // HBS Config
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
   helpers: {
-    count: function(array){
+    count: function(array) {
       var count = 0;
       if (array != null)
       {
@@ -46,7 +43,11 @@ app.engine('hbs', hbs({ // HBS Config
         }
       }
       return count;
-  },
+    },
+    concatURL: function(string) {
+      // return a route
+      return "/post/image/" + string;
+    }
 }
 }));
 
@@ -60,6 +61,11 @@ const options = {
 };
 
 mongoose.connect(databaseURL, options);
+
+
+
+
+
 module.exports = mongoose;
 
 // Sessions

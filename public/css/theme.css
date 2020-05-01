@@ -13,3 +13,7 @@
 .no-underline {
   text-decoration: none !important
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #464246 !important;
+}
