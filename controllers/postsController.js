@@ -5,7 +5,12 @@ const PostModel = require('../models/PostModel');
 // returns post view
 exports.getPost = function(req, res) {
   PostModel.getPostById(req.params.pid, function(post) {
-    res.render('post', {post: post});
+    var postOwner = false;
+    // if session user owns the post
+    if (post.author._id == req.session.user) {
+      postOwner = true;
+    }
+    res.render('post', { post: post, postOwner: postOwner});
   });
 }
 
@@ -22,3 +27,23 @@ exports.createComment = function (req, res) {
     res.send(comment);
   });
 }
+
+exports.createPost = function (req, res) {
+  let post = {
+    author: req.session.user,
+    img: req.file.filename,
+    title: req.body.title,
+    caption: req.body.caption
+  }
+
+  PostModel.createPost(post, function(post) {
+    res.send(post);
+  })
+}
+
+exports.deletePost = function (req, res) {
+  PostModel.deletePost(req.params.pid, function(message) {
+    res.send(message);
+  })
+}
+

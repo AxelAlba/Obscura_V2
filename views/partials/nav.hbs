@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/navbar.css">
+<script src="/js/createPost.js"></script>
 
 <!--header-->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -25,15 +26,51 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-      <a class="nav-link btn btn-outline-dark" onclick="on()">Upload</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          Upload
+        </button>
       </li>
       <li class="nav-item">
-      <a class="nav-link" href="/profile">Profile</a>
+        <a class="nav-link" href="/profile">Profile</a>
       </li>
       <li class="nav-item">
-      <a class="nav-link font-weight-bold" href="/logout">Logout</a>
+        <a class="nav-link font-weight-bold" href="/logout">Logout</a>
       </li>
     </ul>
     </div>
   </div>
 </nav>
+
+<!-- Create Post Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- form -->
+        <form id="postForm" enctype="multipart/form-data">
+          <div class="custom-file">
+            <input type="file" name="file" id="file" class="custom-file-input" required>
+            <label for="file" class="custom-file-label">Choose File</label>
+          </div>
+          <div class="form-group">
+            <label for="postTitle">Title</label>
+            <input type="text" class="form-control" id="postTitle" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="postCaption">Caption</label>
+            <textarea class="form-control" id="postCaption" rows="2" required></textarea>
+          </div>
+          <button type="button" id="close-upload-btn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" id="upload-btn" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
