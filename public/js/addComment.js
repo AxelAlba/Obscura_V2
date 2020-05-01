@@ -26,7 +26,6 @@ function addCommentHandler(postToCommentOn, commentBox) {
     url: `/api/post/${postToCommentOn}/comment/create`,
     method: "POST",
     data: {
-      commenter: "5e8b098057612101fcfee99f", // temporary user_id 
       comment: comment
     },
     success: (data, status) => {

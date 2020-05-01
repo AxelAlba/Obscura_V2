@@ -18,7 +18,7 @@ exports.getDiscoverPosts = function (req, res) {
 
 // creates comment
 exports.createComment = function (req, res) {
-  PostModel.createComment(req.params.pid, req.body.commenter, req.body.comment, function (comment) {
+  PostModel.createComment(req.params.pid, req.session.user, req.body.comment, function (comment) {
     res.send(comment);
   });
 }
