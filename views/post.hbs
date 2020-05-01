@@ -2,10 +2,11 @@
 <link rel="stylesheet" href="/css/posts.css"> <!-- post.hbs css-->
 <!-- required script -->
 <script src="/js/addComment.js"></script> 
+<script src="/js/deletePost.js"></script>
 <!-- passing data from server to be used in client-side scripting -->
 <input type="hidden" id="pid" value={{post._id}}>
 <!-- Modal -->
-<div class="modal-container">
+<div class="modal-container" id="post-modal">
   <div class="modal-body">
     <div class="container-fluid">
       <div class="row mx-auto">
@@ -37,6 +38,10 @@
           <div id="info-pane-details" class="px-3 pb-3">
             <h4>{{post.title}}</h4>
             <p>{{post.caption}}</p>
+            <!-- DELETE button -->
+            {{#if postOwner}}
+              <button id="delete-btn" class="btn btn-link p-0">Delete post</button>
+            {{/if}}
           </div>
           <!-- Comments Section -->
           <div id="comments-section">

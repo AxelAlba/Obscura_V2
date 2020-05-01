@@ -26,7 +26,7 @@ $(document).ready(function() {
     });
 
     // render indeterminate progress bar
-    renderProgressBar();
+    renderCreateProgressBar();
     // disable buttons to prevent multiple uploading
     $("#upload-btn").attr("disabled", true);
     $("#close-upload-btn").attr("disabled", true);
@@ -34,7 +34,7 @@ $(document).ready(function() {
 });
 
 // Renders bootstrap indeterminate progress bar
-function renderProgressBar() {
+function renderCreateProgressBar() {
   var parentDiv = $(".modal-content");
   var div = document.createElement('div');
   $(div).attr('class', 'progress');

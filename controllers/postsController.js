@@ -5,7 +5,12 @@ const PostModel = require('../models/PostModel');
 // returns post view
 exports.getPost = function(req, res) {
   PostModel.getPostById(req.params.pid, function(post) {
-    res.render('post', {post: post});
+    var postOwner = false;
+    // if session user owns the post
+    if (post.author._id == req.session.user) {
+      postOwner = true;
+    }
+    res.render('post', { post: post, postOwner: postOwner});
   });
 }
 
