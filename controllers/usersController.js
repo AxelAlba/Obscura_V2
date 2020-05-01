@@ -110,7 +110,8 @@ exports.registerUser = (req, res) => {
             lastName: req.body.lastName,
             username: req.body.username,
             mobile: req.body.mobile,
-            password: hashed
+            password: hashed,
+            profilePic: 'https://www.cmcaindia.org/wp-content/uploads/2015/11/default-profile-picture-gmail-2.png'
           };
 
           UserModel.create(newUser, (err, user) => {
