@@ -78,7 +78,7 @@ function renderComment(data) {
   $(divCommentDetailsCol).attr('class', 'col-10');
   $(divUsernameRow).attr('class', 'row mx-auto');
   $(linkUsername).attr({
-    href: `/profile/others/${data.commenter._id}`,
+    href: `/profile/${data.commenter._id}`,
     class: 'no-underline'
   });
   $(username).attr('class', 'my-0 primary-color-light');

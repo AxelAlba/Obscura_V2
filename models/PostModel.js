@@ -80,3 +80,10 @@ exports.deletePost = function (postID, next) {
     next("Delete successful");
   })
 }
+
+exports.updateLikes = function (postId, hearts, next) {
+  PostModel.findByIdAndUpdate(postId, {likes: hearts}, {new : true},  function(err, model) {
+    if (err) throw err;
+    next(err, model);
+  })
+}

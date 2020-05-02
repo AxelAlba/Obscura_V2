@@ -78,5 +78,6 @@ router.get('/image/:filename', (req, res) => {
 
 router.delete('/:pid', postsController.deletePost);
 
+router.post('/heart', postsController.heart);
 
 module.exports = router;

@@ -47,3 +47,14 @@ exports.deletePost = function (req, res) {
   })
 }
 
+exports.heart = (req, res) => {
+  var postId = req.body.postId;
+  var hearts = req.body.hearts;
+    //This is for updating the followers of the user being followed.
+    PostModel.updateLikes(postId, hearts, (error, postModel) => {
+      console.log(error);
+      console.log('New likes of this post: ' + postModel.likes);
+      res.send(postModel);
+    });
+};
+
