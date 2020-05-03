@@ -4,11 +4,15 @@
   "description": "social media app for creatives.",
   "main": "index.js",
   "scripts": {
+    "debug": "nodemon -r dotenv/config index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "node -r dotenv/config index.js"
   },
   "author": "3 Idiots",
   "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
     "@handlebars/allow-prototype-access": "^1.0.3",
@@ -30,6 +34,7 @@
   },
   "devDependencies": {
     "async": "^3.2.0",
+    "dotenv": "^8.2.0",
     "nodemon": "^2.0.2"
   }
 }
