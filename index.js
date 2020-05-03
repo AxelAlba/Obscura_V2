@@ -1,13 +1,12 @@
 const express = require('express');
 const hbs = require('express-handlebars');
-const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const Handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
-
-
+const mongoose = require('./models/connection');
+const { envPort, sessionKey } = require('./config');
 
 
 // import routes
@@ -22,8 +21,8 @@ const postRouter = require('./routes/post.js');
 const profileRouter = require('./routes/profile.js');
 
 // create express app
-const port = 3000;
 const app = express();
+const port = envPort || 3000;
 
 // Setup handlebars
 app.set('view engine', 'hbs'); // Set template 
@@ -51,27 +50,9 @@ app.engine('hbs', hbs({ // HBS Config
     }
 }
 }));
-
-
-//setup mongoDB database URL and options
-const databaseURL = 'mongodb+srv://axel:axel123@obscuracluster-2swgt.mongodb.net/obscura?retryWrites=true&w=majority'; 
-const options = { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false 
-};
-
-mongoose.connect(databaseURL, options);
-
-
-
-
-
-module.exports = mongoose;
-
 // Sessions
 app.use(session({
-  secret: 'somegibberishsecret',
+  secret: sessionKey,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   resave: false,
   saveUninitialized: true,
