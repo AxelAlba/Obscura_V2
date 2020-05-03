@@ -24,15 +24,24 @@
               <div class="col-2 pr-2">
                 <img src={{post.author.profilePic}} class="profile-pic mb-0 rounded-circle">
               </div>
-              <div class="col-10">
+              <div class="col-8">
                 <div class="row mx-auto">
                   <a href="/profile/{{post.author._id}}" class="no-underline">
-                    <h5 class="my-0 primary-color-light">{{post.author.firstName}}</h5>
+                    <h5 class="my-0 primary-color-light">{{post.author.firstName}} {{post.author.lastName}}</h5>
                   </a>
                 </div>
                 <div class="row mx-auto">
                   <p class="my-0">@{{post.author.username}}</p>
                 </div>
+              </div>
+              <div class="col-2"> <!-- DELETE button -->
+                {{#if postOwner}}
+                <div class="px-3 pt-3" style='position:relative; left:-5px; top: -10px;'>
+                  <a id="delete-btn" href="javascript;" class="pl-1 primary-color-light"><span class="material-icons">
+                      delete
+                    </span></a>
+                </div>
+                {{/if}}
               </div>
             </div>
           </header>
@@ -70,15 +79,6 @@
                 <div class="heart px-3 pt-3">
                   <p class='hearts' style='position:relative; left:20px; top: -2.5px;'><strong>{{post.likes}}</strong></p>
                 </div>
-              </div>
-              <div class="col"> <!-- DELETE button -->
-                {{#if postOwner}}
-                <div class="px-3 pt-3">
-                  <a id="delete-btn" href="javascript;" class="pl-1 primary-color-light"><span class="material-icons">
-                      delete
-                    </span></a>
-                </div>
-                {{/if}}
               </div>
             </div>
             <!-- comment box -->
