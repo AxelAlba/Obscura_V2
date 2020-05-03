@@ -109,4 +109,9 @@ exports.getFollowers = function (id, next){
   });
 };
 
-
+exports.getFollowingsId = function (id, next){
+  UserModel.findById(id).populate("followings"._id).lean().exec(function(err, user){
+    if (err) throw err;
+    next(user.followings);
+  });
+};

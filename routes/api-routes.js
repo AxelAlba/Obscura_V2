@@ -7,7 +7,9 @@ const { isPrivate } = require('../middlewares/checkAuth');
 
 // routes and route handlers (controllers)
 //for the posts
-router.get('/getDiscoverPosts', isPrivate, postsController.getDiscoverPosts);        // get all posts
+router.get('/getDiscoverPosts', isPrivate, postsController.getDiscoverPosts);           // get all posts
+router.get('/getFollowingPosts', isPrivate, postsController.getFollowingPosts);        // get all user's followings' posts
+router.get('/getProfilePosts', isPrivate, postsController.getProfilePosts);            // get specific profile's posts
 router.post('/post/:pid/comment/create', isPrivate, postsController.createComment);  // create comment on post
 
 //for the users

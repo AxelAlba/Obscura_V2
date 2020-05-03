@@ -6,7 +6,6 @@ router.get('/', isPrivate, userController.getProfile); // read profile
 router.get('/settings', isPrivate, userController.settings); // settings page
 router.get('/:uid', isPrivate, userController.getUser); //other profiles
 
-
 router.post('/follow', userController.follow);
 router.post('/unfollow', userController.unfollow);
 

@@ -1,5 +1,6 @@
 //Importing the model (database)
 const UserModel = require('../models/UserModel');
+const PostModel = require('../models/PostModel');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator');
@@ -165,7 +166,7 @@ exports.loginUser = (req, res) => {
 
             console.log(req.session);
 
-            res.redirect('/newsfeed');
+            res.redirect('/discover');
           } else {
             // passwords don't match
             req.flash('error_msg', 'Incorrect password. Please try again.');
