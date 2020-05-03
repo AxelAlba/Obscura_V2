@@ -7,6 +7,9 @@ const MongoStore = require('connect-mongo')(session);
 const Handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 
+
+
+
 // import routes
 const apiRouter = require('./routes/api-routes.js');
 const indexRouter = require('./routes/landing.js');
@@ -31,7 +34,7 @@ app.engine('hbs', hbs({ // HBS Config
   layoutsDir: __dirname + '/views/layouts/',
   partialsDir: __dirname + '/views/partials/',
   helpers: {
-    count: function(array){
+    count: function(array) {
       var count = 0;
       if (array != null)
       {
@@ -41,7 +44,11 @@ app.engine('hbs', hbs({ // HBS Config
         }
       }
       return count;
-  },
+    },
+    concatURL: function(string) {
+      // return a route
+      return "/post/image/" + string;
+    }
 }
 }));
 
@@ -55,6 +62,11 @@ const options = {
 };
 
 mongoose.connect(databaseURL, options);
+
+
+
+
+
 module.exports = mongoose;
 
 // Sessions

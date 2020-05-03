@@ -55,7 +55,7 @@ function addToGallery(item, parentDiv) {
   var link = document.createElement('a');
   var img = document.createElement('img');
   // adding attributes
-  $(img).attr('src', item.img);
+  $(img).attr('src', `/post/image/${item.img}`);
   $(link).attr('data-fancybox', '');    
   $(link).attr('data-type', 'ajax');
   $(link).attr('data-src', `/post/${item._id}`);

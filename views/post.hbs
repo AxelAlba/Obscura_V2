@@ -1,17 +1,20 @@
 <!-- required css -->
+<link rel="stylesheet" href="/css/heart.css"> <!-- heart css-->
 <link rel="stylesheet" href="/css/posts.css"> <!-- post.hbs css-->
 <!-- required script -->
 <script src="/js/addComment.js"></script> 
+<script src="/js/deletePost.js"></script>
+<script src="/js/heart.js"></script>
 <!-- passing data from server to be used in client-side scripting -->
 <input type="hidden" id="pid" value={{post._id}}>
 <!-- Modal -->
-<div class="modal-container">
+<div class="modal-container" id="post-modal">
   <div class="modal-body">
     <div class="container-fluid">
       <div class="row mx-auto">
         <!-- Image Pane -->
         <div class="col-9" id="post-image-pane">
-          <img src={{post.img}} class="m-0" id="post-image">
+          <img src={{concatURL post.img}} class="m-0" id="post-image">
         </div>
         <!-- Info Pane -->
         <div class="col-3" class="pt-0" id="post-info-pane">
@@ -23,7 +26,7 @@
               </div>
               <div class="col-10">
                 <div class="row mx-auto">
-                  <a href="/profile/others/{{post.author._id}}" class="no-underline">
+                  <a href="/profile/{{post.author._id}}" class="no-underline">
                     <h5 class="my-0 primary-color-light">{{post.author.firstName}}</h5>
                   </a>
                 </div>
@@ -37,6 +40,10 @@
           <div id="info-pane-details" class="px-3 pb-3">
             <h4>{{post.title}}</h4>
             <p>{{post.caption}}</p>
+            <!-- DELETE button -->
+            {{#if postOwner}}
+              <button id="delete-btn" class="btn btn-link p-0">Delete post</button>
+            {{/if}}
           </div>
           <!-- Comments Section -->
           <div id="comments-section">
@@ -48,7 +55,7 @@
                 </div>
                 <div class="col-10">
                   <div class="row mx-auto">
-                    <a href="/profile/others/{{this.commenter._id}}" class="no-underline">
+                    <a href="/profile/{{this.commenter._id}}" class="no-underline">
                       <h5 class="my-0 primary-color-light">{{this.commenter.username}}</h5>
                     </a>
                   </div>
@@ -62,9 +69,9 @@
           </div>
           <!-- Footer -->         
           <div id="info-pane-footer">
-            <div class="likes px-3 pt-3">
-              <p><strong>{{post.likes}}</strong> likes</p>
-            </div>
+                <div class="heart px-3 pt-3" style = 'display:inline-block; float:left;'>
+                  <p class = 'hearts' style = 'position:relative; left:20px; top: -2.5px;'><strong>{{post.likes}}</strong></p>
+                </div>
             <form class="px-3">
               <div class="input-group input-group-lg m-0">
                 <textarea 

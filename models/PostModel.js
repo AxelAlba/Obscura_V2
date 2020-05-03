@@ -94,3 +94,27 @@ exports.createComment = function (id, commenter, comment, next) {
         next(commentDetails);
       });
 };
+
+exports.createPost = function (postObj, next) {
+  const post = new PostModel(postObj);
+
+  post.save(function (err, post) {
+    if (err) throw err;
+    
+    next(post);
+  });
+};
+
+exports.deletePost = function (postID, next) {
+  PostModel.deleteOne({_id: postID}, function(err) {
+    if (err) throw err;
+    next("Delete successful");
+  })
+}
+
+exports.updateLikes = function (postId, hearts, next) {
+  PostModel.findByIdAndUpdate(postId, {likes: hearts}, {new : true},  function(err, model) {
+    if (err) throw err;
+    next(err, model);
+  })
+}
