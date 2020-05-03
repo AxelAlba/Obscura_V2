@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "debug": "nodemon -r dotenv/config index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node -r dotenv/config index.js"
+    "dev": "node -r dotenv/config index.js",
+    "start": "node index.js"
   },
   "author": "3 Idiots",
   "license": "ISC",
