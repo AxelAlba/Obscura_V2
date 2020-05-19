@@ -23,10 +23,17 @@ npm install
 ```
 npm run dev
 ```
+### :earth_asia:Web Application link
+https://obscura-dlsu.herokuapp.com/
+
 
 ### :dart:Features:
+- :heavy_check_mark:Register & Login
+- :heavy_check_mark:Edit own profile settings 
 - :heavy_check_mark:Search User by username 
-- :x:Discover Feed (must exclude followings and self)
-- :x:View profiles (needs refactoring once sessions are implemented)
-- :x:Edit own profile settings (needs refactoring once sessions are implemented)
-- :x:Create comment on posts (needs refactoring once sessions are implemented)
+- :heavy_check_mark:Follow & Unfollow Users
+- :heavy_check_mark:View for Followed & Followings
+- :heavy_check_mark:View profiles 
+- :heavy_check_mark:Discover, Following, & own Feed
+- :heavy_check_mark:Create and delete posts 
+- :heavy_check_mark:Create comment and add hearts on posts 
